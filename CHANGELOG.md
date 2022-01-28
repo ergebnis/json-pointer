@@ -6,6 +6,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
-For a full diff see [`6e8bd2a...main`][6e8bd2a...main].
+For a full diff see [`a5ba52c...main`][a5ba52c...main].
 
-[6e8bd2a...main]: https://github.com/ergebnis/json-pointer/compare/6e8bd2a...main
+[a5ba52c...main]: https://github.com/ergebnis/json-pointer/compare/a5ba52c...main

@@ -20,11 +20,11 @@ namespace Ergebnis\Json\Pointer;
  */
 final class ReferenceToken
 {
-    private string $escapedValue;
+    private string $jsonStringValue;
 
-    private function __construct(string $escapedValue)
+    private function __construct(string $jsonStringValue)
     {
-        $this->escapedValue = $escapedValue;
+        $this->jsonStringValue = $jsonStringValue;
     }
 
     /**
@@ -40,9 +40,11 @@ final class ReferenceToken
     }
 
     /**
+     * @see https://datatracker.ietf.org/doc/html/rfc6901#section-5
+     *
      * @throws Exception\InvalidReferenceToken
      */
-    public static function fromEscapedString(string $value): self
+    public static function fromJsonString(string $value): self
     {
         if (1 !== \preg_match('/^(?P<referenceToken>((?P<unescaped>[\x00-\x2E]|[\x30-\x7D]|[\x7F-\x{10FFFF}])|(?P<escaped>~[01]))*)$/u', $value)) {
             throw Exception\InvalidReferenceToken::fromString($value);
@@ -51,9 +53,9 @@ final class ReferenceToken
         return new self($value);
     }
 
-    public static function fromUnescapedString(string $value): self
+    public static function fromString(string $value): self
     {
-        return self::fromEscapedString(\str_replace(
+        return self::fromJsonString(\str_replace(
             [
                 '~',
                 '/',
@@ -66,12 +68,12 @@ final class ReferenceToken
         ));
     }
 
-    public function toEscapedString(): string
+    public function toJsonString(): string
     {
-        return $this->escapedValue;
+        return $this->jsonStringValue;
     }
 
-    public function toUnescapedString(): string
+    public function toString(): string
     {
         return \str_replace(
             [
@@ -82,12 +84,12 @@ final class ReferenceToken
                 '/',
                 '~',
             ],
-            $this->escapedValue,
+            $this->jsonStringValue,
         );
     }
 
     public function equals(self $other): bool
     {
-        return $this->escapedValue === $other->escapedValue;
+        return $this->jsonStringValue === $other->jsonStringValue;
     }
 }

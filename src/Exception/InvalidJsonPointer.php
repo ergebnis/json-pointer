@@ -15,10 +15,10 @@ namespace Ergebnis\Json\Pointer\Exception;
 
 final class InvalidJsonPointer extends \InvalidArgumentException implements Exception
 {
-    public static function fromString(string $value): self
+    public static function fromJsonString(string $value): self
     {
         return new self(\sprintf(
-            'Value "%s" does not appear to be a valid JSON Pointer.',
+            'Value "%s" does not appear to be a valid JSON string representation of a JSON Pointer.',
             $value,
         ));
     }

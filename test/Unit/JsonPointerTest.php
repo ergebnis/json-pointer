@@ -32,13 +32,13 @@ final class JsonPointerTest extends Framework\TestCase
     use Test\Util\Helper;
 
     /**
-     * @dataProvider provideInvalidValue
+     * @dataProvider provideInvalidJsonStringValue
      */
-    public function testFromStringRejectsInvalidValue(string $value): void
+    public function testFromJsonStringRejectsInvalidValue(string $value): void
     {
         $this->expectException(Exception\InvalidJsonPointer::class);
 
-        JsonPointer::fromString($value);
+        JsonPointer::fromJsonString($value);
     }
 
     /**
@@ -46,7 +46,7 @@ final class JsonPointerTest extends Framework\TestCase
      *
      * @return \Generator<string, array{0: string}>
      */
-    public function provideInvalidValue(): \Generator
+    public function provideInvalidJsonStringValue(): \Generator
     {
         $values = [
             'does-not-start-with-forward-slash' => 'foo',
@@ -62,13 +62,13 @@ final class JsonPointerTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider provideValidValue
+     * @dataProvider provideValidJsonStringValue
      */
-    public function testFromStringReturnsJsonPointer(string $value): void
+    public function testFromJsonStringReturnsJsonPointer(string $value): void
     {
-        $jsonPointer = JsonPointer::fromString($value);
+        $jsonPointer = JsonPointer::fromJsonString($value);
 
-        self::assertSame($value, $jsonPointer->toString());
+        self::assertSame($value, $jsonPointer->toJsonString());
     }
 
     /**
@@ -76,7 +76,7 @@ final class JsonPointerTest extends Framework\TestCase
      *
      * @return \Generator<string, array{0: string}>
      */
-    public function provideValidValue(): \Generator
+    public function provideValidJsonStringValue(): \Generator
     {
         $values = [
             'document' => '',
@@ -108,7 +108,7 @@ final class JsonPointerTest extends Framework\TestCase
     {
         $jsonPointer = JsonPointer::document();
 
-        self::assertSame('', $jsonPointer->toString());
+        self::assertSame('', $jsonPointer->toJsonString());
     }
 
     /**
@@ -133,28 +133,28 @@ final class JsonPointerTest extends Framework\TestCase
         $values = [
             'document-and-reference-token-from-unescaped-string' => [
                 JsonPointer::document(),
-                ReferenceToken::fromUnescapedString('foo'),
-                JsonPointer::fromString('/foo'),
+                ReferenceToken::fromString('foo'),
+                JsonPointer::fromJsonString('/foo'),
             ],
             'document-from-string-and-reference-token-from-unescaped-string' => [
-                JsonPointer::fromString(''),
-                ReferenceToken::fromUnescapedString('foo'),
-                JsonPointer::fromString('/foo'),
+                JsonPointer::fromJsonString(''),
+                ReferenceToken::fromString('foo'),
+                JsonPointer::fromJsonString('/foo'),
             ],
             'pointer-and-reference-token-from-int' => [
-                JsonPointer::fromString('/foo'),
+                JsonPointer::fromJsonString('/foo'),
                 ReferenceToken::fromInt(9000),
-                JsonPointer::fromString('/foo/9000'),
+                JsonPointer::fromJsonString('/foo/9000'),
             ],
             'pointer-and-reference-token-from-unescaped-string' => [
-                JsonPointer::fromString('/foo'),
-                ReferenceToken::fromUnescapedString('bar/baz'),
-                JsonPointer::fromString('/foo/bar~1baz'),
+                JsonPointer::fromJsonString('/foo'),
+                ReferenceToken::fromString('bar/baz'),
+                JsonPointer::fromJsonString('/foo/bar~1baz'),
             ],
             'pointer-and-reference-token-from-escaped-string' => [
-                JsonPointer::fromString('/foo'),
-                ReferenceToken::fromEscapedString('bar~1baz'),
-                JsonPointer::fromString('/foo/bar~1baz'),
+                JsonPointer::fromJsonString('/foo'),
+                ReferenceToken::fromJsonString('bar~1baz'),
+                JsonPointer::fromJsonString('/foo/bar~1baz'),
             ],
         ];
 
@@ -169,8 +169,8 @@ final class JsonPointerTest extends Framework\TestCase
 
     public function testEqualsReturnsFalseWhenValueIsDifferent(): void
     {
-        $one = JsonPointer::fromString('/foo/bar/0/baz~0');
-        $two = JsonPointer::fromString('/foo/bar/1');
+        $one = JsonPointer::fromJsonString('/foo/bar/0/baz~0');
+        $two = JsonPointer::fromJsonString('/foo/bar/1');
 
         self::assertFalse($one->equals($two));
     }
@@ -179,8 +179,8 @@ final class JsonPointerTest extends Framework\TestCase
     {
         $value = '/foo/bar/0/baz~0';
 
-        $one = JsonPointer::fromString($value);
-        $two = JsonPointer::fromString($value);
+        $one = JsonPointer::fromJsonString($value);
+        $two = JsonPointer::fromJsonString($value);
 
         self::assertTrue($one->equals($two));
     }

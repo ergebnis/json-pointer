@@ -25,7 +25,7 @@ composer require ergebnis/json-pointer
 
 ### `ReferenceToken`
 
-You can create a `ReferenceToken` from an unescaped `string` value:
+You can create a `ReferenceToken` from a `string` value:
 
 ```php
 <?php
@@ -34,13 +34,13 @@ declare(strict_types=1);
 
 use Ergebnis\Json\Pointer;
 
-$referenceToken = Pointer\ReferenceToken::fromUnescapedString('foo/bar');
+$referenceToken = Pointer\ReferenceToken::fromString('foo/bar');
 
-$referenceToken->toEscapedString();    // 'foo~1bar'
-$referenceToken->toUnescapedString();  // 'foo/bar'
+$referenceToken->toJsonString(); // 'foo~1bar'
+$referenceToken->toString();     // 'foo/bar'
 ```
 
-You can create a `ReferenceToken` from an escaped `string` value:
+You can create a `ReferenceToken` from a [JSON `string` value](https://datatracker.ietf.org/doc/html/rfc6901#section-5):
 
 ```php
 <?php
@@ -49,10 +49,10 @@ declare(strict_types=1);
 
 use Ergebnis\Json\Pointer;
 
-$referenceToken = Pointer\ReferenceToken::fromEscapedString('foo~1bar');
+$referenceToken = Pointer\ReferenceToken::fromJsonString('foo~1bar');
 
-$referenceToken->toEscapedString();    // 'foo~1bar'
-$referenceToken->toUnescapedString();  // 'foo/bar'
+$referenceToken->toJsonString(); // 'foo~1bar'
+$referenceToken->toString();     // 'foo/bar'
 ```
 
 You can create a `ReferenceToken` from an `int` value:
@@ -66,8 +66,8 @@ use Ergebnis\Json\Pointer;
 
 $referenceToken = Pointer\ReferenceToken::fromInt(9001);
 
-$referenceToken->toEscapedString();    // '9001'
-$referenceToken->toUnescapedString();  // '9001'
+$referenceToken->toJsonString(); // '9001'
+$referenceToken->toString();     // '9001'
 ```
 
 You can compare `ReferenceToken`s:
@@ -79,8 +79,8 @@ declare(strict_types=1);
 
 use Ergebnis\Json\Pointer;
 
-$one = Pointer\ReferenceToken::fromUnescapedString('foo/bar');
-$two = Pointer\ReferenceToken::fromEscapedString('foo~1bar');
+$two = Pointer\ReferenceToken::fromJsonString('foo~1bar');
+$one = Pointer\ReferenceToken::fromString('foo/bar');
 
 $one->equals($two); // true
 ```
@@ -98,10 +98,10 @@ use Ergebnis\Json\Pointer;
 
 $jsonPointer = Pointer\JsonPointer::document();
 
-$jsonPointer->toString(); // ''
+$jsonPointer->toJsonString(); // ''
 ```
 
-You can create a `JsonPointer` from a `string` value:
+You can create a `JsonPointer` from a [JSON `string` representation](https://datatracker.ietf.org/doc/html/rfc6901#section-5) value:
 
 ```php
 <?php
@@ -110,9 +110,9 @@ declare(strict_types=1);
 
 use Ergebnis\Json\Pointer;
 
-$jsonPointer = Pointer\JsonPointer::fromString('/foo/bar');
+$jsonPointer = Pointer\JsonPointer::fromJsonString('/foo/bar');
 
-$jsonPointer->toString(); // '/foo/bar'
+$jsonPointer->toJsonString(); // '/foo/bar'
 ```
 
 You can compare `JsonPointer`s:
@@ -124,8 +124,8 @@ declare(strict_types=1);
 
 use Ergebnis\Json\Pointer;
 
-$one = Pointer\JsonPointer::fromString('/foo/bar');
-$two = Pointer\JsonPointer::fromString('/foo~1bar');
+$one = Pointer\JsonPointer::fromJsonString('/foo/bar');
+$two = Pointer\JsonPointer::fromJsonString('/foo~1bar');
 
 $one->equals($two); // false
 ```
@@ -139,13 +139,13 @@ declare(strict_types=1);
 
 use Ergebnis\Json\Pointer;
 
-$jsonPointer = Pointer\JsonPointer::fromString('/foo/bar');
+$jsonPointer = Pointer\JsonPointer::fromJsonString('/foo/bar');
 
-$referenceToken = Pointer\ReferenceToken::fromUnescapedString('baz');
+$referenceToken = Pointer\ReferenceToken::fromString('baz');
 
 $newJsonPointer = $jsonPointer->append($referenceToken);
 
-$newJsonPointer->toString(); // '/foo/bar/baz'
+$newJsonPointer->toJsonString(); // '/foo/bar/baz'
 ```
 
 ## Changelog

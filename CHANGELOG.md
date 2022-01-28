@@ -6,7 +6,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
-For a full diff see [`1.0.0...main`][1.0.0...main].
+For a full diff see [`2.0.0...main`][2.0.0...main].
+
+## [`2.0.0`][2.0.0]
+
+For a full diff see [`1.0.0...2.0.0`][1.0.0...2.0.0].
+
+## Changed
+
+- Renamed named constructors and accessors of `Exception\InvalidJsonPointer`, `JsonPointer`, and `ReferenceToken` ([#4]), by [@localheinz]
+
+  - `Exception\InvalidJsonPointer::fromString()` to `JsonPointer::fromJsonString()`
+  - `JsonPointer::fromString()` to `JsonPointer::fromJsonString()`
+  - `JsonPointer::toString()` to `JsonPointer::toJsonString()`
+  - `ReferenceToken::fromEscapedString()` to `ReferenceToken::fromJsonString()`
+  - `ReferenceToken::fromUnescapedString()` to `ReferenceToken::fromString()`
+  - `ReferenceToken::toEscapedString()` to `ReferenceToken::toJsonString()`
+  - `ReferenceToken::toUnescapedString()` to `ReferenceToken::toString()`
 
 ## [`1.0.0`][1.0.0]
 
@@ -19,8 +35,10 @@ For a full diff see [`a5ba52c...1.0.0`][a5ba52c...1.0.0].
 
 [a5ba52c...1.0.0]: https://github.com/ergebnis/json-pointer/compare/a5ba52c...1.0.0
 [1.0.0...main]: https://github.com/ergebnis/json-pointer/compare/1.0.0...main
+[2.0.0...main]: https://github.com/ergebnis/json-pointer/compare/2.0.0...main
 
 [#1]: https://github.com/ergebnis/json-pointer/pull/1
 [#2]: https://github.com/ergebnis/json-pointer/pull/2
+[#4]: https://github.com/ergebnis/json-pointer/pull/4
 
 [@localheinz]: https://github.com/localheinz

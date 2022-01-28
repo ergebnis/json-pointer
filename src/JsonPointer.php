@@ -20,22 +20,23 @@ namespace Ergebnis\Json\Pointer;
  */
 final class JsonPointer
 {
-    private string $value;
+    private string $jsonStringValue;
 
-    private function __construct(string $value)
+    private function __construct(string $jsonStringValue)
     {
-        $this->value = $value;
+        $this->jsonStringValue = $jsonStringValue;
     }
 
     /**
      * @see https://datatracker.ietf.org/doc/html/rfc6901#section-3
+     * @see https://datatracker.ietf.org/doc/html/rfc6901#section-5
      *
      * @throws Exception\InvalidJsonPointer
      */
-    public static function fromString(string $value): self
+    public static function fromJsonString(string $value): self
     {
         if (1 !== \preg_match('/^(\/(?P<referenceToken>((?P<unescaped>[\x00-\x2E]|[\x30-\x7D]|[\x7F-\x{10FFFF}])|(?P<escaped>~[01]))*))*$/u', $value, $matches)) {
-            throw Exception\InvalidJsonPointer::fromString($value);
+            throw Exception\InvalidJsonPointer::fromJsonString($value);
         }
 
         return new self($value);
@@ -50,18 +51,18 @@ final class JsonPointer
     {
         return new self(\sprintf(
             '%s/%s',
-            $this->value,
-            $referenceToken->toEscapedString(),
+            $this->jsonStringValue,
+            $referenceToken->toJsonString(),
         ));
     }
 
-    public function toString(): string
+    public function toJsonString(): string
     {
-        return $this->value;
+        return $this->jsonStringValue;
     }
 
     public function equals(self $other): bool
     {
-        return $this->value === $other->value;
+        return $this->jsonStringValue === $other->jsonStringValue;
     }
 }

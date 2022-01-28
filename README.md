@@ -23,7 +23,7 @@ composer require ergebnis/json-pointer
 
 ## Usage
 
-### ReferenceToken
+### `ReferenceToken`
 
 You can create a `ReferenceToken` from an unescaped `string` value:
 

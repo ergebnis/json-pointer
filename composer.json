@@ -1,6 +1,6 @@
 {
   "name": "ergebnis/json-pointer",
-  "description": "Provides a JSON pointer as a value object.",
+  "description": "Provides JSON pointer as a value object.",
   "license": "MIT",
   "type": "library",
   "keywords": [

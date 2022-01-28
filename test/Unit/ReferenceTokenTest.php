@@ -92,99 +92,99 @@ final class ReferenceTokenTest extends Framework\TestCase
     public function provideValueAndJsonStringValue(): \Generator
     {
         $values = [
-            'integerish-9000' => [
-                '9000',
-                '9000',
-            ],
-            'integerish-zero' => [
+            'array-index-0' => [
                 '0',
                 '0',
             ],
-            'string-back-slash' => [
-                '\\',
-                '\\',
+            'array-index-1' => [
+                '1',
+                '1',
             ],
-            'string-caret' => [
+            'array-index-9000' => [
+                '9000',
+                '9000',
+            ],
+            'caret' => [
                 '^',
                 '^',
             ],
-            'string-percent' => [
+            'percent' => [
                 '%',
                 '%',
             ],
-            'string-pipe' => [
+            'pipe' => [
                 '|',
                 '|',
             ],
-            'string-quote-double' => [
+            'quote-double' => [
                 '"',
                 '"',
             ],
-            'string-quote-single' => [
+            'quote-single' => [
                 "'",
                 "'",
             ],
-            'string-slash-backward' => [
+            'slash-backwards' => [
                 '\\',
                 '\\',
             ],
-            'string-slash-forward' => [
+            'slash-forward' => [
                 '/',
                 '~1',
             ],
-            'string-space' => [
+            'space' => [
                 ' ',
                 ' ',
             ],
-            'string-word' => [
+            'word' => [
                 'foo',
                 'foo',
             ],
-            'string-tilde' => [
+            'tilde' => [
                 '~',
                 '~0',
             ],
-            'string-unicode-character' => [
+            'unicode-character' => [
                 '😆',
                 '😆',
             ],
-            'string-with-caret' => [
+            'with-caret' => [
                 'foo^bar',
                 'foo^bar',
             ],
-            'string-with-percent' => [
+            'with-percent' => [
                 'foo%bar',
                 'foo%bar',
             ],
-            'string-with-pipe' => [
+            'with-pipe' => [
                 'foo|bar',
                 'foo|bar',
             ],
-            'string-with-quote-double' => [
+            'with-quote-double' => [
                 'foo"bar',
                 'foo"bar',
             ],
-            'string-with-quote-single' => [
+            'with-quote-single' => [
                 "foo'bar",
                 "foo'bar",
             ],
-            'string-with-slash-backward' => [
+            'with-slash-backwards' => [
                 'foo\\bar',
                 'foo\\bar',
             ],
-            'string-with-slash-forward' => [
+            'with-slash-forwards' => [
                 'foo/bar',
                 'foo~1bar',
             ],
-            'string-with-space' => [
+            'with-space' => [
                 'foo bar',
                 'foo bar',
             ],
-            'string-with-tilde' => [
+            'with-tilde' => [
                 'foo~bar',
                 'foo~0bar',
             ],
-            'string-with-unicode-character' => [
+            'with-unicode-character' => [
                 'foo😆bar',
                 'foo😆bar',
             ],

@@ -15,7 +15,7 @@ namespace Ergebnis\Json\Pointer\Exception;
 
 final class InvalidReferenceToken extends \InvalidArgumentException implements Exception
 {
-    public static function fromString(string $value): self
+    public static function fromJsonString(string $value): self
     {
         return new self(\sprintf(
             'Value "%s" does not appear to be a valid JSON Pointer reference token.',

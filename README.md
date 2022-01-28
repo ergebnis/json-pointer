@@ -85,6 +85,69 @@ $two = Pointer\ReferenceToken::fromEscapedString('foo~1bar');
 $one->equals($two); // true
 ```
 
+### `JsonPointer`
+
+You can create a `JsonPointer` referencing a document:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Json\Pointer;
+
+$jsonPointer = Pointer\JsonPointer::document();
+
+$jsonPointer->toString(); // ''
+```
+
+You can create a `JsonPointer` from a `string` value:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Json\Pointer;
+
+$jsonPointer = Pointer\JsonPointer::fromString('/foo/bar');
+
+$jsonPointer->toString(); // '/foo/bar'
+```
+
+You can compare `JsonPointer`s:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Json\Pointer;
+
+$one = Pointer\JsonPointer::fromString('/foo/bar');
+$two = Pointer\JsonPointer::fromString('/foo~1bar');
+
+$one->equals($two); // false
+```
+
+You can append a `ReferenceToken` to a `JsonPointer`:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Json\Pointer;
+
+$jsonPointer = Pointer\JsonPointer::fromString('/foo/bar');
+
+$referenceToken = Pointer\ReferenceToken::fromUnescapedString('baz');
+
+$newJsonPointer = $jsonPointer->append($referenceToken);
+
+$newJsonPointer->toString(); // '/foo/bar/baz'
+```
+
 ## Changelog
 
 Please have a look at [`CHANGELOG.md`](CHANGELOG.md).

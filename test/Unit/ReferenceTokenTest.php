@@ -32,11 +32,11 @@ final class ReferenceTokenTest extends Framework\TestCase
     /**
      * @dataProvider provideInvalidEscapedStringValue
      */
-    public function testFromEscapedStringRejectsInvalidValue(string $value): void
+    public function testFromEscapedJsonStringRejectsInvalidValue(string $value): void
     {
         $this->expectException(Exception\InvalidReferenceToken::class);
 
-        ReferenceToken::fromEscapedString($value);
+        ReferenceToken::fromJsonString($value);
     }
 
     /**
@@ -59,29 +59,29 @@ final class ReferenceTokenTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider provideUnescapedAndEscapedValue
+     * @dataProvider provideValueAndJsonStringValue
      */
-    public function testFromEscapedStringReturnsReferenceToken(
-        string $unescaped,
-        string $escaped
+    public function testFromJsonStringReturnsReferenceToken(
+        string $value,
+        string $jsonStringValue
     ): void {
-        $referenceToken = ReferenceToken::fromEscapedString($escaped);
+        $referenceToken = ReferenceToken::fromJsonString($jsonStringValue);
 
-        self::assertSame($escaped, $referenceToken->toEscapedString());
-        self::assertSame($unescaped, $referenceToken->toUnescapedString());
+        self::assertSame($jsonStringValue, $referenceToken->toJsonString());
+        self::assertSame($value, $referenceToken->toString());
     }
 
     /**
-     * @dataProvider provideUnescapedAndEscapedValue
+     * @dataProvider provideValueAndJsonStringValue
      */
-    public function testFromUnescapedStringReturnsReferenceToken(
-        string $unescaped,
-        string $escaped
+    public function testFromStringReturnsReferenceToken(
+        string $value,
+        string $jsonStringValue
     ): void {
-        $referenceToken = ReferenceToken::fromUnescapedString($unescaped);
+        $referenceToken = ReferenceToken::fromString($value);
 
-        self::assertSame($escaped, $referenceToken->toEscapedString());
-        self::assertSame($unescaped, $referenceToken->toUnescapedString());
+        self::assertSame($jsonStringValue, $referenceToken->toJsonString());
+        self::assertSame($value, $referenceToken->toString());
     }
 
     /**
@@ -89,7 +89,7 @@ final class ReferenceTokenTest extends Framework\TestCase
      *
      * @return \Generator<string, array{0: string, 1: string}>
      */
-    public function provideUnescapedAndEscapedValue(): \Generator
+    public function provideValueAndJsonStringValue(): \Generator
     {
         $values = [
             'integerish-9000' => [
@@ -216,26 +216,26 @@ final class ReferenceTokenTest extends Framework\TestCase
     {
         $referenceToken = ReferenceToken::fromInt($value);
 
-        self::assertSame((string) $value, $referenceToken->toEscapedString());
-        self::assertSame((string) $value, $referenceToken->toUnescapedString());
+        self::assertSame((string) $value, $referenceToken->toJsonString());
+        self::assertSame((string) $value, $referenceToken->toString());
     }
 
-    public function testEqualsReturnsFalseWhenEscapedValueIsDifferent(): void
+    public function testEqualsReturnsFalseWhenJsonStringValueIsDifferent(): void
     {
         $faker = self::faker();
 
-        $one = ReferenceToken::fromUnescapedString($faker->sentence());
-        $two = ReferenceToken::fromUnescapedString($faker->sentence());
+        $one = ReferenceToken::fromString($faker->sentence());
+        $two = ReferenceToken::fromString($faker->sentence());
 
         self::assertFalse($one->equals($two));
     }
 
-    public function testEqualsReturnsTrueWhenEscapedValueIsSame(): void
+    public function testEqualsReturnsTrueWhenJsonStringValueIsSame(): void
     {
         $value = self::faker()->sentence();
 
-        $one = ReferenceToken::fromUnescapedString($value);
-        $two = ReferenceToken::fromUnescapedString($value);
+        $one = ReferenceToken::fromString($value);
+        $two = ReferenceToken::fromString($value);
 
         self::assertTrue($one->equals($two));
     }

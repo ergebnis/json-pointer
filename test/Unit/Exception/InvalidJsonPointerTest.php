@@ -26,14 +26,14 @@ final class InvalidJsonPointerTest extends Framework\TestCase
 {
     use Test\Util\Helper;
 
-    public function testFromValueReturnsInvalidJsonPointerException(): void
+    public function testFromJsonStringReturnsInvalidJsonPointerException(): void
     {
         $value = self::faker()->sentence();
 
-        $exception = Exception\InvalidJsonPointer::fromString($value);
+        $exception = Exception\InvalidJsonPointer::fromJsonString($value);
 
         $message = \sprintf(
-            'Value "%s" does not appear to be a valid JSON Pointer.',
+            'Value "%s" does not appear to be a valid JSON string representation of a JSON Pointer.',
             $value,
         );
 

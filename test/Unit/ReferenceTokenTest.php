@@ -190,10 +190,10 @@ final class ReferenceTokenTest extends Framework\TestCase
             ],
         ];
 
-        foreach ($values as $key => [$unescaped, $escaped]) {
+        foreach ($values as $key => [$value, $jsonStringValue]) {
             yield $key => [
-                $unescaped,
-                $escaped,
+                $value,
+                $jsonStringValue,
             ];
         }
     }

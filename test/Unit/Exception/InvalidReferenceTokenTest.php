@@ -26,11 +26,11 @@ final class InvalidReferenceTokenTest extends Framework\TestCase
 {
     use Test\Util\Helper;
 
-    public function testFromStringReturnsInvalidReferenceToken(): void
+    public function testFromJsonStringReturnsInvalidReferenceToken(): void
     {
         $value = self::faker()->word();
 
-        $exception = Exception\InvalidReferenceToken::fromString($value);
+        $exception = Exception\InvalidReferenceToken::fromJsonString($value);
 
         $message = \sprintf(
             'Value "%s" does not appear to be a valid JSON Pointer reference token.',

@@ -112,7 +112,7 @@ final class JsonPointerTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider provideExpectedJsonPointerJsonPointerAndSegment
+     * @dataProvider provideJsonPointerReferenceTokenAndExpectedJsonPointer
      */
     public function testAppendReturnsJsonPointer(
         JsonPointer $jsonPointer,
@@ -128,7 +128,7 @@ final class JsonPointerTest extends Framework\TestCase
     /**
      * @return \Generator<string, array{0: JsonPointer, 1: ReferenceToken, 2: JsonPointer}>
      */
-    public function provideExpectedJsonPointerJsonPointerAndSegment(): \Generator
+    public function provideJsonPointerReferenceTokenAndExpectedJsonPointer(): \Generator
     {
         $values = [
             'document-and-reference-token-from-unescaped-string' => [

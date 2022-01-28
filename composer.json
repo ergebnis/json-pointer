@@ -5,7 +5,8 @@
   "type": "library",
   "keywords": [
     "json",
-    "pointer"
+    "pointer",
+    "rfc6901"
   ],
   "authors": [
     {

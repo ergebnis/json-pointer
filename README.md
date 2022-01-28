@@ -23,7 +23,67 @@ composer require ergebnis/json-pointer
 
 ## Usage
 
-:bulb: This is a great place for showing a few usage examples!
+### ReferenceToken
+
+You can create a `ReferenceToken` from an unescaped `string` value:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Json\Pointer;
+
+$referenceToken = Pointer\ReferenceToken::fromUnescapedString('foo/bar');
+
+$referenceToken->toEscapedString();    // 'foo~1bar'
+$referenceToken->toUnescapedString();  // 'foo/bar'
+```
+
+You can create a `ReferenceToken` from an escaped `string` value:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Json\Pointer;
+
+$referenceToken = Pointer\ReferenceToken::fromEscapedString('foo~1bar');
+
+$referenceToken->toEscapedString();    // 'foo~1bar'
+$referenceToken->toUnescapedString();  // 'foo/bar'
+```
+
+You can create a `ReferenceToken` from an `int` value:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Json\Pointer;
+
+$referenceToken = Pointer\ReferenceToken::fromInt(9001);
+
+$referenceToken->toEscapedString();    // '9001'
+$referenceToken->toUnescapedString();  // '9001'
+```
+
+You can compare `ReferenceToken`s:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Json\Pointer;
+
+$one = Pointer\ReferenceToken::fromUnescapedString('foo/bar');
+$two = Pointer\ReferenceToken::fromEscapedString('foo~1bar');
+
+$one->equals($two); // true
+```
 
 ## Changelog
 

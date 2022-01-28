@@ -1,0 +1,63 @@
+{
+  "name": "ergebnis/json-pointer",
+  "description": "Provides a JSON pointer as a value object.",
+  "license": "MIT",
+  "type": "library",
+  "keywords": [
+    "json",
+    "pointer"
+  ],
+  "authors": [
+    {
+      "name": "Andreas Möller",
+      "email": "am@localheinz.com"
+    }
+  ],
+  "homepage": "https://github.com/ergebnis/json-pointer",
+  "support": {
+    "issues": "https://github.com/ergebnis/json-pointer/issues",
+    "source": "https://github.com/ergebnis/json-pointer"
+  },
+  "require": {
+    "php": "^7.4 || ^8.0"
+  },
+  "require-dev": {
+    "ergebnis/composer-normalize": "^2.23.0",
+    "ergebnis/data-provider": "^1.1.0",
+    "ergebnis/license": "^1.2.0",
+    "ergebnis/php-cs-fixer-config": "^4.0.0",
+    "fakerphp/faker": "^1.18.0",
+    "infection/infection": "~0.26.4",
+    "phpunit/phpunit": "^9.5.13",
+    "psalm/plugin-phpunit": "~0.16.1",
+    "vimeo/psalm": "^4.19"
+  },
+  "autoload": {
+    "psr-4": {
+      "Ergebnis\\Json\\Pointer\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Ergebnis\\Json\\Pointer\\Test\\": "test/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/package-versions-deprecated": true,
+      "ergebnis/composer-normalize": true,
+      "infection/extension-installer": true
+    },
+    "platform": {
+      "php": "7.4.16"
+    },
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
+  "extra": {
+    "composer-normalize": {
+      "indent-size": 2,
+      "indent-style": "space"
+    }
+  }
+}

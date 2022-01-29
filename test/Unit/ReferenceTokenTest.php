@@ -30,9 +30,9 @@ final class ReferenceTokenTest extends Framework\TestCase
     use Test\Util\Helper;
 
     /**
-     * @dataProvider provideInvalidEscapedStringValue
+     * @dataProvider provideInvalidJsonStringValue
      */
-    public function testFromEscapedJsonStringRejectsInvalidValue(string $value): void
+    public function testFromJsonStringRejectsInvalidValue(string $value): void
     {
         $this->expectException(Exception\InvalidReferenceToken::class);
 
@@ -44,7 +44,7 @@ final class ReferenceTokenTest extends Framework\TestCase
      *
      * @return \Generator<string, array{0: string}>
      */
-    public function provideInvalidEscapedStringValue(): \Generator
+    public function provideInvalidJsonStringValue(): \Generator
     {
         $values = [
             'property-with-unescaped-forward-slash' => 'foo/bar',

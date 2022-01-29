@@ -50,11 +50,26 @@ final class JsonPointerTest extends Framework\TestCase
     {
         $values = [
             'does-not-start-with-forward-slash' => 'foo',
-            'property-with-unescaped-tilde' => '/foo~bar',
-            'property-with-unescaped-tildes' => '/foo~~bar',
+            'property-with-tilde-followed-by-word' => '/foo~bar',
         ];
 
         foreach ($values as $key => $value) {
+            yield $key => [
+                $value,
+            ];
+        }
+
+        foreach (\range(2, 9) as $digit) {
+            $key = \sprintf(
+                'property-with-tilde-followed-by-digit-%d',
+                $digit,
+            );
+
+            $value = \sprintf(
+                '/foo~%d',
+                $digit,
+            );
+
             yield $key => [
                 $value,
             ];

@@ -38,7 +38,7 @@ final class JsonPointer
      */
     public static function fromJsonString(string $value): self
     {
-        if (1 !== \preg_match(Pattern::JSON_POINTER_JSON_STRING, $value)) {
+        if (1 !== \preg_match(Pattern::JSON_STRING_JSON_POINTER, $value)) {
             throw Exception\InvalidJsonPointer::fromJsonString($value);
         }
 
@@ -55,6 +55,29 @@ final class JsonPointer
     public static function fromReferenceTokens(ReferenceToken ...$referenceTokens): self
     {
         return new self(...$referenceTokens);
+    }
+
+    /**
+     * @see https://datatracker.ietf.org/doc/html/rfc6901#section-3
+     * @see https://datatracker.ietf.org/doc/html/rfc6901#section-5
+     * @see https://datatracker.ietf.org/doc/html/rfc3986#section-3.5
+     *
+     * @throws Exception\InvalidJsonPointer
+     */
+    public static function fromUriFragmentIdentifierString(string $value): self
+    {
+        if (1 !== \preg_match(Pattern::URI_FRAGMENT_IDENTIFIER_JSON_POINTER, $value)) {
+            throw Exception\InvalidJsonPointer::fromJsonString($value);
+        }
+
+        $uriFragmentIdentifierStringValues = \array_slice(
+            \explode('/', $value),
+            1,
+        );
+
+        return new self(...\array_map(static function (string $uriFragmentIdentifierStringValue): ReferenceToken {
+            return ReferenceToken::fromUriFragmentIdentifierString($uriFragmentIdentifierStringValue);
+        }, $uriFragmentIdentifierStringValues));
     }
 
     public static function document(): self
@@ -81,6 +104,20 @@ final class JsonPointer
             '/%s',
             \implode('/', \array_map(static function (ReferenceToken $referenceToken): string {
                 return $referenceToken->toJsonString();
+            }, $this->referenceTokens)),
+        );
+    }
+
+    public function toUriFragmentIdentifierString(): string
+    {
+        if ([] === $this->referenceTokens) {
+            return '#';
+        }
+
+        return \sprintf(
+            '#/%s',
+            \implode('/', \array_map(static function (ReferenceToken $referenceToken): string {
+                return $referenceToken->toUriFragmentIdentifierString();
             }, $this->referenceTokens)),
         );
     }

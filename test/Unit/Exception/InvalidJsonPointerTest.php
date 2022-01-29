@@ -39,4 +39,18 @@ final class InvalidJsonPointerTest extends Framework\TestCase
 
         self::assertSame($message, $exception->getMessage());
     }
+
+    public function testFromUriFragmentIdentifierStringReturnsInvalidJsonPointerException(): void
+    {
+        $value = self::faker()->sentence();
+
+        $exception = Exception\InvalidJsonPointer::fromUriFragmentIdentifierString($value);
+
+        $message = \sprintf(
+            'Value "%s" does not appear to be a valid URI fragment identifier representation of a JSON Pointer.',
+            $value,
+        );
+
+        self::assertSame($message, $exception->getMessage());
+    }
 }

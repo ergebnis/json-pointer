@@ -12,6 +12,10 @@ For a full diff see [`2.0.0...main`][2.0.0...main].
 
 For a full diff see [`1.0.0...2.0.0`][1.0.0...2.0.0].
 
+## Added
+
+- Added named constructor `JsonPointer::fromReferenceTokens()` to allow creation of `JsonPointer` from `ReferenceToken`s ([#9]), by [@localheinz]
+
 ## Changed
 
 - Renamed named constructors and accessors of `Exception\InvalidJsonPointer`, `JsonPointer`, and `ReferenceToken` ([#4]) and ([#5]), by [@localheinz]
@@ -41,5 +45,6 @@ For a full diff see [`a5ba52c...1.0.0`][a5ba52c...1.0.0].
 [#2]: https://github.com/ergebnis/json-pointer/pull/2
 [#4]: https://github.com/ergebnis/json-pointer/pull/4
 [#5]: https://github.com/ergebnis/json-pointer/pull/5
+[#9]: https://github.com/ergebnis/json-pointer/pull/9
 
 [@localheinz]: https://github.com/localheinz

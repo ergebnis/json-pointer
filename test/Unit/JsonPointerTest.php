@@ -62,55 +62,211 @@ final class JsonPointerTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider provideValidJsonStringValue
+     * @dataProvider provideJsonStringValueAndReferenceTokens
+     *
+     * @param array<int, ReferenceToken> $referenceTokens
      */
-    public function testFromJsonStringReturnsJsonPointer(string $value): void
-    {
-        $jsonPointer = JsonPointer::fromJsonString($value);
+    public function testFromJsonStringReturnsJsonPointer(
+        string $jsonStringValue,
+        array $referenceTokens
+    ): void {
+        $jsonPointer = JsonPointer::fromJsonString($jsonStringValue);
 
-        self::assertSame($value, $jsonPointer->toJsonString());
+        self::assertSame($jsonStringValue, $jsonPointer->toJsonString());
+        self::assertEquals($referenceTokens, $jsonPointer->toReferenceTokens());
+    }
+
+    /**
+     * @dataProvider provideJsonStringValueAndReferenceTokens
+     *
+     * @param array<int, ReferenceToken> $referenceTokens
+     */
+    public function testFromReferenceTokensReturnsJsonPointer(
+        string $jsonStringValue,
+        array $referenceTokens
+    ): void {
+        $jsonPointer = JsonPointer::fromReferenceTokens(...$referenceTokens);
+
+        self::assertSame($jsonStringValue, $jsonPointer->toJsonString());
+        self::assertEquals($referenceTokens, $jsonPointer->toReferenceTokens());
     }
 
     /**
      * @see https://datatracker.ietf.org/doc/html/rfc6901#section-5
      *
-     * @return \Generator<string, array{0: string}>
+     * @return \Generator<string, array{0: string, 1: array<int, ReferenceToken>}>
      */
-    public function provideValidJsonStringValue(): \Generator
+    public function provideJsonStringValueAndReferenceTokens(): \Generator
     {
         $values = [
-            'array-index-0' => '/0',
-            'array-index-1' => '/1',
-            'array-index-9000' => '/9000',
-            'document' => '',
-            'document-root' => '/',
-            'property-caret' => '/^',
-            'property-percent' => '/%',
-            'property-pipe' => '/|',
-            'property-quote-double' => '/"',
-            'property-quote-single' => "/'",
-            'property-slash-backward' => '/\\',
-            'property-slash-forward-escaped' => '/~1',
-            'property-space' => '/ ',
-            'property-tilde-escaped' => '/~0',
-            'property-unicode-character' => '/😆',
-            'property-with-array-index' => '/foo/0',
-            'property-with-caret' => '/foo^bar',
-            'property-with-percent' => '/foo%bar',
-            'property-with-pipe' => '/foo|bar',
-            'property-with-quote-double' => '/foo"bar',
-            'property-with-quote-single' => "/foo'bar",
-            'property-with-slash-backward' => '/foo\\bar',
-            'property-with-slash-forward-escaped' => '/foo~1bar',
-            'property-with-tilde-escaped' => '/foo~0bar',
-            'property-with-unicode-character' => '/foo😆bar',
-            'property-with-word' => '/foo/bar',
-            'property-word' => '/foo',
+            'array-index-0' => [
+                '/0',
+                [
+                    ReferenceToken::fromInt(0),
+                ],
+            ],
+            'array-index-1' => [
+                '/1',
+                [
+                    ReferenceToken::fromInt(1),
+                ],
+            ],
+            'array-index-9000' => [
+                '/9000',
+                [
+                    ReferenceToken::fromInt(9000),
+                ],
+            ],
+            'document' => [
+                '',
+                [],
+            ],
+            'document-root' => [
+                '/',
+                [
+                    ReferenceToken::fromString(''),
+                ],
+            ],
+            'property-caret' => [
+                '/^',
+                [
+                    ReferenceToken::fromString('^'),
+                ],
+            ],
+            'property-percent' => [
+                '/%',
+                [
+                    ReferenceToken::fromString('%'),
+                ],
+            ],
+            'property-pipe' => [
+                '/|',
+                [
+                    ReferenceToken::fromString('|'),
+                ],
+            ],
+            'property-quote-double' => [
+                '/"',
+                [
+                    ReferenceToken::fromString('"'),
+                ],
+            ],
+            'property-quote-single' => [
+                "/'",
+                [
+                    ReferenceToken::fromString("'"),
+                ],
+            ],
+            'property-slash-backward' => [
+                '/\\',
+                [
+                    ReferenceToken::fromString('\\'),
+                ],
+            ],
+            'property-slash-forward-escaped' => [
+                '/~1',
+                [
+                    ReferenceToken::fromString('/'),
+                ],
+            ],
+            'property-space' => [
+                '/ ',
+                [
+                    ReferenceToken::fromString(' '),
+                ],
+            ],
+            'property-tilde-escaped' => [
+                '/~0',
+                [
+                    ReferenceToken::fromString('~'),
+                ],
+            ],
+            'property-unicode-character' => [
+                '/😆',
+                [
+                    ReferenceToken::fromString('😆'),
+                ],
+            ],
+            'property-with-array-index' => [
+                '/foo/0',
+                [
+                    ReferenceToken::fromString('foo'),
+                    ReferenceToken::fromInt(0),
+                ],
+            ],
+            'property-with-caret' => [
+                '/foo^bar',
+                [
+                    ReferenceToken::fromString('foo^bar'),
+                ],
+            ],
+            'property-with-percent' => [
+                '/foo%bar',
+                [
+                    ReferenceToken::fromString('foo%bar'),
+                ],
+            ],
+            'property-with-pipe' => [
+                '/foo|bar',
+                [
+                    ReferenceToken::fromString('foo|bar'),
+                ],
+            ],
+            'property-with-quote-double' => [
+                '/foo"bar',
+                [
+                    ReferenceToken::fromString('foo"bar'),
+                ],
+            ],
+            'property-with-quote-single' => [
+                "/foo'bar",
+                [
+                    ReferenceToken::fromString("foo'bar"),
+                ],
+            ],
+            'property-with-slash-backward' => [
+                '/foo\\bar',
+                [
+                    ReferenceToken::fromString('foo\\bar'),
+                ],
+            ],
+            'property-with-slash-forward-escaped' => [
+                '/foo~1bar',
+                [
+                    ReferenceToken::fromString('foo/bar'),
+                ],
+            ],
+            'property-with-tilde-escaped' => [
+                '/foo~0bar',
+                [
+                    ReferenceToken::fromString('foo~bar'),
+                ],
+            ],
+            'property-with-unicode-character' => [
+                '/foo😆bar',
+                [
+                    ReferenceToken::fromString('foo😆bar'),
+                ],
+            ],
+            'property-with-word' => [
+                '/foo/bar',
+                [
+                    ReferenceToken::fromString('foo'),
+                    ReferenceToken::fromString('bar'),
+                ],
+            ],
+            'property-word' => [
+                '/foo',
+                [
+                    ReferenceToken::fromString('foo'),
+                ],
+            ],
         ];
 
-        foreach ($values as $key => $value) {
+        foreach ($values as $key => [$value, $referenceTokens]) {
             yield $key => [
                 $value,
+                $referenceTokens,
             ];
         }
     }

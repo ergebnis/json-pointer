@@ -115,6 +115,24 @@ $jsonPointer = Pointer\JsonPointer::fromJsonString('/foo/bar');
 $jsonPointer->toJsonString(); // '/foo/bar'
 ```
 
+You can create a `JsonPointer` from `ReferenceToken`s:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Json\Pointer;
+
+$referenceTokens = [
+    Pointer\ReferenceToken::fromString('foo'),
+    Pointer\ReferenceToken::fromString('bar'),
+];
+
+$jsonPointer = Pointer\JsonPointer::fromReferenceTokens(...$referenceTokens);
+
+$jsonPointer->toJsonString(); // '/foo/bar'
+```
 You can compare `JsonPointer`s:
 
 ```php

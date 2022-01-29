@@ -47,11 +47,27 @@ final class ReferenceTokenTest extends Framework\TestCase
     public function provideInvalidJsonStringValue(): \Generator
     {
         $values = [
-            'property-with-unescaped-forward-slash' => 'foo/bar',
-            'property-with-unescaped-tilde' => 'foo~bar',
+            'property-with-slash-forward' => 'foo/bar',
+            'property-with-tilde-followed-by-word' => 'foo~bar',
         ];
 
         foreach ($values as $key => $value) {
+            yield $key => [
+                $value,
+            ];
+        }
+
+        foreach (\range(2, 9) as $digit) {
+            $key = \sprintf(
+                'property-with-tilde-followed-by-digit-%d',
+                $digit,
+            );
+
+            $value = \sprintf(
+                'foo~%d',
+                $digit,
+            );
+
             yield $key => [
                 $value,
             ];
@@ -124,7 +140,7 @@ final class ReferenceTokenTest extends Framework\TestCase
                 "'",
                 "'",
             ],
-            'slash-backwards' => [
+            'slash-backward' => [
                 '\\',
                 '\\',
             ],
@@ -168,11 +184,11 @@ final class ReferenceTokenTest extends Framework\TestCase
                 "foo'bar",
                 "foo'bar",
             ],
-            'with-slash-backwards' => [
+            'with-slash-backward' => [
                 'foo\\bar',
                 'foo\\bar',
             ],
-            'with-slash-forwards' => [
+            'with-slash-forward' => [
                 'foo/bar',
                 'foo~1bar',
             ],

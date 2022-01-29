@@ -46,7 +46,7 @@ final class ReferenceToken
      */
     public static function fromJsonString(string $value): self
     {
-        if (1 !== \preg_match(Pattern::REFERENCE_TOKEN, $value)) {
+        if (1 !== \preg_match(Pattern::JSON_STRING_REFERENCE_TOKEN, $value)) {
             throw Exception\InvalidReferenceToken::fromJsonString($value);
         }
 
@@ -68,6 +68,28 @@ final class ReferenceToken
         return new self($value);
     }
 
+    /**
+     * @throws Exception\InvalidReferenceToken
+     */
+    public static function fromUriFragmentIdentifierString(string $value): self
+    {
+        if (1 !== \preg_match(Pattern::URI_FRAGMENT_IDENTIFIER_REFERENCE_TOKEN, $value)) {
+            throw Exception\InvalidReferenceToken::fromJsonString($value);
+        }
+
+        return new self(\str_replace(
+            [
+                '~1',
+                '~0',
+            ],
+            [
+                '/',
+                '~',
+            ],
+            \rawurldecode($value),
+        ));
+    }
+
     public function toJsonString(): string
     {
         return \str_replace(
@@ -81,6 +103,21 @@ final class ReferenceToken
             ],
             $this->value,
         );
+    }
+
+    public function toUriFragmentIdentifierString(): string
+    {
+        return \rawurlencode(\str_replace(
+            [
+                '~',
+                '/',
+            ],
+            [
+                '~0',
+                '~1',
+            ],
+            $this->value,
+        ));
     }
 
     public function toString(): string

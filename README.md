@@ -34,10 +34,11 @@ declare(strict_types=1);
 
 use Ergebnis\Json\Pointer;
 
-$referenceToken = Pointer\ReferenceToken::fromString('foo/bar');
+$referenceToken = Pointer\ReferenceToken::fromString('foo/9000/😆');
 
-$referenceToken->toJsonString(); // 'foo~1bar'
-$referenceToken->toString();     // 'foo/bar'
+$referenceToken->toJsonString();                  // 'foo~19000~😆'
+$referenceToken->toString();                      // 'foo/9000/😆'
+$referenceToken->toUriFragmentIdentifierString(); // 'foo~19000~1%F0%9F%98%86'
 ```
 
 You can create a `ReferenceToken` from a [JSON `string` value](https://datatracker.ietf.org/doc/html/rfc6901#section-5):
@@ -49,10 +50,27 @@ declare(strict_types=1);
 
 use Ergebnis\Json\Pointer;
 
-$referenceToken = Pointer\ReferenceToken::fromJsonString('foo~1bar');
+$referenceToken = Pointer\ReferenceToken::fromJsonString('foo~19000~😆');
 
-$referenceToken->toJsonString(); // 'foo~1bar'
-$referenceToken->toString();     // 'foo/bar'
+$referenceToken->toJsonString();                  // 'foo~19000~😆'
+$referenceToken->toString();                      // 'foo/9000/😆'
+$referenceToken->toUriFragmentIdentifierString(); // 'foo~19000~1%F0%9F%98%86'
+```
+
+You can create a `ReferenceToken` from a [URI fragmend identifier `string` value](https://datatracker.ietf.org/doc/html/rfc6901#section-6):
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Json\Pointer;
+
+$referenceToken = Pointer\ReferenceToken::fromUriFragmentIdentifierString('foo~19000~1%F0%9F%98%86');
+
+$referenceToken->toJsonString();                  // 'foo~19000~😆'
+$referenceToken->toString();                      // 'foo/9000/😆'
+$referenceToken->toUriFragmentIdentifierString(); // 'foo~19000~1%F0%9F%98%86'
 ```
 
 You can create a `ReferenceToken` from an `int` value:
@@ -66,8 +84,9 @@ use Ergebnis\Json\Pointer;
 
 $referenceToken = Pointer\ReferenceToken::fromInt(9001);
 
-$referenceToken->toJsonString(); // '9001'
-$referenceToken->toString();     // '9001'
+$referenceToken->toJsonString();                  // '9001'
+$referenceToken->toString();                      // '9001'
+$referenceToken->toUriFragmentIdentifierString(); // '9001'
 ```
 
 You can compare `ReferenceToken`s:
@@ -98,7 +117,8 @@ use Ergebnis\Json\Pointer;
 
 $jsonPointer = Pointer\JsonPointer::document();
 
-$jsonPointer->toJsonString(); // ''
+$jsonPointer->toJsonString();                  // ''
+$jsonPointer->toUriFragmentIdentifierString(); // '#'
 ```
 
 You can create a `JsonPointer` from a [JSON `string` representation](https://datatracker.ietf.org/doc/html/rfc6901#section-5) value:
@@ -110,9 +130,26 @@ declare(strict_types=1);
 
 use Ergebnis\Json\Pointer;
 
-$jsonPointer = Pointer\JsonPointer::fromJsonString('/foo/bar');
+$jsonPointer = Pointer\JsonPointer::fromJsonString('/foo/bar/😆');
 
-$jsonPointer->toJsonString(); // '/foo/bar'
+$jsonPointer->toJsonString();                  // '/foo/bar/😆'
+$jsonPointer->toUriFragmentIdentifierString(); // '#/foo/bar/%F0%9F%98%86'
+```
+
+You can create a `JsonPointer` from a [URI fragment identifier `string` representation](https://datatracker.ietf.org/doc/html/rfc6901#section-6) value:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Json\Pointer;
+
+$jsonPointer = Pointer\JsonPointer::fromJsonString('#/foo/bar/%F0%9F%98%86');
+
+$jsonPointer->toJsonString();                  // '/foo/bar/😆'
+$jsonPointer->toUriFragmentIdentifierString(); // '#/foo/bar/%F0%9F%98%86'
+$jsonPointer = Pointer\JsonPointer::fromUriFragmentIdentifierString('#foo/bar');
 ```
 
 You can create a `JsonPointer` from `ReferenceToken`s:
@@ -131,7 +168,8 @@ $referenceTokens = [
 
 $jsonPointer = Pointer\JsonPointer::fromReferenceTokens(...$referenceTokens);
 
-$jsonPointer->toJsonString(); // '/foo/bar'
+$jsonPointer->toJsonString();                  // '/foo/bar'
+$jsonPointer->toUriFragmentIdentifierString(); // '#/foo/bar'
 ```
 You can compare `JsonPointer`s:
 
@@ -163,7 +201,8 @@ $referenceToken = Pointer\ReferenceToken::fromString('baz');
 
 $newJsonPointer = $jsonPointer->append($referenceToken);
 
-$newJsonPointer->toJsonString(); // '/foo/bar/baz'
+$newJsonPointer->toJsonString();                  // '/foo/bar/baz'
+$newJsonPointer->toUriFragmentIdentifierString(); // '#foo/bar/baz'
 ```
 
 ## Changelog

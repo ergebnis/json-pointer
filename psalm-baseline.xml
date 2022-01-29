@@ -5,4 +5,11 @@
       <code>$referenceTokens</code>
     </MixedPropertyTypeCoercion>
   </file>
+  <file src="test/Unit/ReferenceTokenTest.php">
+    <TooFewArguments occurrences="3">
+      <code>testFromJsonStringReturnsReferenceToken</code>
+      <code>testFromStringReturnsReferenceToken</code>
+      <code>testFromUriFragmentIdentifierStringReturnsReferenceToken</code>
+    </TooFewArguments>
+  </file>
 </files>

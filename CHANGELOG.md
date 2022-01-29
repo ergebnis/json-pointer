@@ -14,6 +14,7 @@ For a full diff see [`1.0.0...2.0.0`][1.0.0...2.0.0].
 
 ## Added
 
+- Added named constructors `JsonPointer::fromUriFragmentIdentifierString()` and `ReferenceToken::fromUriFragmentIdentifierString()` to allow creation from URI fragment identifier representations ([#6]), by [@localheinz]
 - Added named constructor `JsonPointer::fromReferenceTokens()` to allow creation of `JsonPointer` from `ReferenceToken`s ([#9]), by [@localheinz]
 
 ## Changed
@@ -45,6 +46,7 @@ For a full diff see [`a5ba52c...1.0.0`][a5ba52c...1.0.0].
 [#2]: https://github.com/ergebnis/json-pointer/pull/2
 [#4]: https://github.com/ergebnis/json-pointer/pull/4
 [#5]: https://github.com/ergebnis/json-pointer/pull/5
+[#6]: https://github.com/ergebnis/json-pointer/pull/6
 [#9]: https://github.com/ergebnis/json-pointer/pull/9
 
 [@localheinz]: https://github.com/localheinz

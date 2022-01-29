@@ -77,133 +77,170 @@ final class JsonPointerTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider provideJsonStringValueAndReferenceTokens
+     * @dataProvider provideJsonStringValueUriFragmentIdentifierStringValueAndReferenceTokens
      *
      * @param array<int, ReferenceToken> $referenceTokens
      */
     public function testFromJsonStringReturnsJsonPointer(
         string $jsonStringValue,
+        string $uriFragmentIdentifierStringValue,
         array $referenceTokens
     ): void {
         $jsonPointer = JsonPointer::fromJsonString($jsonStringValue);
 
         self::assertSame($jsonStringValue, $jsonPointer->toJsonString());
+        self::assertSame($uriFragmentIdentifierStringValue, $jsonPointer->toUriFragmentIdentifierString());
         self::assertEquals($referenceTokens, $jsonPointer->toReferenceTokens());
     }
 
     /**
-     * @dataProvider provideJsonStringValueAndReferenceTokens
+     * @dataProvider provideJsonStringValueUriFragmentIdentifierStringValueAndReferenceTokens
+     *
+     * @param array<int, ReferenceToken> $referenceTokens
+     */
+    public function testFromUriFragmentIdentifierStringReturnsJsonPointer(
+        string $jsonStringValue,
+        string $uriFragmentIdentifierStringValue,
+        array $referenceTokens
+    ): void {
+        $jsonPointer = JsonPointer::fromUriFragmentIdentifierString($uriFragmentIdentifierStringValue);
+
+        self::assertSame($jsonStringValue, $jsonPointer->toJsonString());
+        self::assertSame($uriFragmentIdentifierStringValue, $jsonPointer->toUriFragmentIdentifierString());
+        self::assertEquals($referenceTokens, $jsonPointer->toReferenceTokens());
+    }
+
+    /**
+     * @dataProvider provideJsonStringValueUriFragmentIdentifierStringValueAndReferenceTokens
      *
      * @param array<int, ReferenceToken> $referenceTokens
      */
     public function testFromReferenceTokensReturnsJsonPointer(
         string $jsonStringValue,
+        string $uriFragmentIdentifierStringValue,
         array $referenceTokens
     ): void {
         $jsonPointer = JsonPointer::fromReferenceTokens(...$referenceTokens);
 
         self::assertSame($jsonStringValue, $jsonPointer->toJsonString());
+        self::assertSame($uriFragmentIdentifierStringValue, $jsonPointer->toUriFragmentIdentifierString());
         self::assertEquals($referenceTokens, $jsonPointer->toReferenceTokens());
     }
 
     /**
      * @see https://datatracker.ietf.org/doc/html/rfc6901#section-5
      *
-     * @return \Generator<string, array{0: string, 1: array<int, ReferenceToken>}>
+     * @return \Generator<string, array{0: string, 1: string, 2: array<int, ReferenceToken>}>
      */
-    public function provideJsonStringValueAndReferenceTokens(): \Generator
+    public function provideJsonStringValueUriFragmentIdentifierStringValueAndReferenceTokens(): \Generator
     {
         $values = [
             'array-index-0' => [
                 '/0',
+                '#/0',
                 [
                     ReferenceToken::fromInt(0),
                 ],
             ],
             'array-index-1' => [
                 '/1',
+                '#/1',
                 [
                     ReferenceToken::fromInt(1),
                 ],
             ],
             'array-index-9000' => [
                 '/9000',
+                '#/9000',
                 [
                     ReferenceToken::fromInt(9000),
                 ],
             ],
             'document' => [
                 '',
+                '#',
                 [],
             ],
             'document-root' => [
                 '/',
+                '#/',
                 [
                     ReferenceToken::fromString(''),
                 ],
             ],
             'property-caret' => [
                 '/^',
+                '#/%5E',
                 [
                     ReferenceToken::fromString('^'),
                 ],
             ],
             'property-percent' => [
                 '/%',
+                '#/%25',
                 [
                     ReferenceToken::fromString('%'),
                 ],
             ],
             'property-pipe' => [
                 '/|',
+                '#/%7C',
                 [
                     ReferenceToken::fromString('|'),
                 ],
             ],
             'property-quote-double' => [
                 '/"',
+                '#/%22',
                 [
                     ReferenceToken::fromString('"'),
                 ],
             ],
             'property-quote-single' => [
                 "/'",
+                '#/%27',
                 [
                     ReferenceToken::fromString("'"),
                 ],
             ],
             'property-slash-backward' => [
                 '/\\',
+                '#/%5C',
                 [
                     ReferenceToken::fromString('\\'),
                 ],
             ],
             'property-slash-forward-escaped' => [
                 '/~1',
+                '#/~1',
                 [
                     ReferenceToken::fromString('/'),
                 ],
             ],
             'property-space' => [
                 '/ ',
+                '#/%20',
                 [
                     ReferenceToken::fromString(' '),
                 ],
             ],
             'property-tilde-escaped' => [
                 '/~0',
+                '#/~0',
                 [
                     ReferenceToken::fromString('~'),
                 ],
             ],
             'property-unicode-character' => [
                 '/😆',
+                '#/%F0%9F%98%86',
                 [
                     ReferenceToken::fromString('😆'),
                 ],
             ],
             'property-with-array-index' => [
                 '/foo/0',
+                '#/foo/0',
                 [
                     ReferenceToken::fromString('foo'),
                     ReferenceToken::fromInt(0),
@@ -211,60 +248,70 @@ final class JsonPointerTest extends Framework\TestCase
             ],
             'property-with-caret' => [
                 '/foo^bar',
+                '#/foo%5Ebar',
                 [
                     ReferenceToken::fromString('foo^bar'),
                 ],
             ],
             'property-with-percent' => [
                 '/foo%bar',
+                '#/foo%25bar',
                 [
                     ReferenceToken::fromString('foo%bar'),
                 ],
             ],
             'property-with-pipe' => [
                 '/foo|bar',
+                '#/foo%7Cbar',
                 [
                     ReferenceToken::fromString('foo|bar'),
                 ],
             ],
             'property-with-quote-double' => [
                 '/foo"bar',
+                '#/foo%22bar',
                 [
                     ReferenceToken::fromString('foo"bar'),
                 ],
             ],
             'property-with-quote-single' => [
                 "/foo'bar",
+                '#/foo%27bar',
                 [
                     ReferenceToken::fromString("foo'bar"),
                 ],
             ],
             'property-with-slash-backward' => [
                 '/foo\\bar',
+                '#/foo%5Cbar',
                 [
                     ReferenceToken::fromString('foo\\bar'),
                 ],
             ],
             'property-with-slash-forward-escaped' => [
                 '/foo~1bar',
+                '#/foo~1bar',
                 [
                     ReferenceToken::fromString('foo/bar'),
                 ],
             ],
             'property-with-tilde-escaped' => [
                 '/foo~0bar',
+                '#/foo~0bar',
                 [
                     ReferenceToken::fromString('foo~bar'),
                 ],
             ],
             'property-with-unicode-character' => [
                 '/foo😆bar',
+                '#/foo%F0%9F%98%86bar',
                 [
                     ReferenceToken::fromString('foo😆bar'),
                 ],
             ],
             'property-with-word' => [
                 '/foo/bar',
+                '#/foo/bar',
                 [
                     ReferenceToken::fromString('foo'),
                     ReferenceToken::fromString('bar'),
@@ -272,16 +319,63 @@ final class JsonPointerTest extends Framework\TestCase
             ],
             'property-word' => [
                 '/foo',
+                '#/foo',
                 [
                     ReferenceToken::fromString('foo'),
                 ],
             ],
         ];
 
-        foreach ($values as $key => [$value, $referenceTokens]) {
+        foreach ($values as $key => [$jsonStringValue, $uriFragmentIdentifierStringValue,$referenceTokens]) {
+            yield $key => [
+                $jsonStringValue,
+                $uriFragmentIdentifierStringValue,
+                $referenceTokens,
+            ];
+        }
+    }
+
+    /**
+     * @dataProvider provideInvalidUriFragmentIdentifierStringValue
+     */
+    public function testFromUriFragmentIdentifierStringRejectsInvalidValue(string $value): void
+    {
+        $this->expectException(Exception\InvalidJsonPointer::class);
+
+        JsonPointer::fromUriFragmentIdentifierString($value);
+    }
+
+    /**
+     * @see https://datatracker.ietf.org/doc/html/rfc6901#section-5
+     *
+     * @return \Generator<string, array{0: string}>
+     */
+    public function provideInvalidUriFragmentIdentifierStringValue(): \Generator
+    {
+        $values = [
+            'does-not-start-with-hash' => 'foo',
+            'property-with-tilde-followed-by-word' => '#foo~bar',
+        ];
+
+        foreach ($values as $key => $value) {
             yield $key => [
                 $value,
-                $referenceTokens,
+            ];
+        }
+
+        foreach (\range(2, 9) as $digit) {
+            $key = \sprintf(
+                'property-with-tilde-followed-by-digit-%d',
+                $digit,
+            );
+
+            $value = \sprintf(
+                '#foo~%d',
+                $digit,
+            );
+
+            yield $key => [
+                $value,
             ];
         }
     }
@@ -291,6 +385,7 @@ final class JsonPointerTest extends Framework\TestCase
         $jsonPointer = JsonPointer::document();
 
         self::assertSame('', $jsonPointer->toJsonString());
+        self::assertSame('#', $jsonPointer->toUriFragmentIdentifierString());
     }
 
     /**

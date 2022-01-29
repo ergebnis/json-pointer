@@ -42,6 +42,22 @@ final class JsonPointer
         return new self($value);
     }
 
+    public static function fromReferenceTokens(ReferenceToken ...$referenceTokens): self
+    {
+        if ([] === $referenceTokens) {
+            return new self('');
+        }
+
+        $jsonStringValue = \sprintf(
+            '/%s',
+            \implode('/', \array_map(static function (ReferenceToken $referenceToken): string {
+                return $referenceToken->toJsonString();
+            }, $referenceTokens)),
+        );
+
+        return new self($jsonStringValue);
+    }
+
     public static function document(): self
     {
         return new self('');
@@ -59,6 +75,21 @@ final class JsonPointer
     public function toJsonString(): string
     {
         return $this->jsonStringValue;
+    }
+
+    /**
+     * @return array<int, ReferenceToken>
+     */
+    public function toReferenceTokens(): array
+    {
+        $jsonStringValues = \array_slice(
+            \explode('/', $this->jsonStringValue),
+            1,
+        );
+
+        return \array_map(static function (string $jsonStringValue): ReferenceToken {
+            return ReferenceToken::fromJsonString($jsonStringValue);
+        }, $jsonStringValues);
     }
 
     public function equals(self $other): bool

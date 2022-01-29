@@ -20,11 +20,11 @@ namespace Ergebnis\Json\Pointer;
  */
 final class ReferenceToken
 {
-    private string $jsonStringValue;
+    private string $value;
 
-    private function __construct(string $jsonStringValue)
+    private function __construct(string $value)
     {
-        $this->jsonStringValue = $jsonStringValue;
+        $this->value = $value;
     }
 
     /**
@@ -50,46 +50,46 @@ final class ReferenceToken
             throw Exception\InvalidReferenceToken::fromJsonString($value);
         }
 
-        return new self($value);
-    }
-
-    public static function fromString(string $value): self
-    {
-        return self::fromJsonString(\str_replace(
+        return new self(\str_replace(
             [
-                '~',
-                '/',
+                '~1',
+                '~0',
             ],
             [
-                '~0',
-                '~1',
+                '/',
+                '~',
             ],
             $value,
         ));
     }
 
+    public static function fromString(string $value): self
+    {
+        return new self($value);
+    }
+
     public function toJsonString(): string
     {
-        return $this->jsonStringValue;
+        return \str_replace(
+            [
+                '~',
+                '/',
+            ],
+            [
+                '~0',
+                '~1',
+            ],
+            $this->value,
+        );
     }
 
     public function toString(): string
     {
-        return \str_replace(
-            [
-                '~1',
-                '~0',
-            ],
-            [
-                '/',
-                '~',
-            ],
-            $this->jsonStringValue,
-        );
+        return $this->value;
     }
 
     public function equals(self $other): bool
     {
-        return $this->jsonStringValue === $other->jsonStringValue;
+        return $this->value === $other->value;
     }
 }

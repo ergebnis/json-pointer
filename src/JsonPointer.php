@@ -20,11 +20,14 @@ namespace Ergebnis\Json\Pointer;
  */
 final class JsonPointer
 {
-    private string $jsonStringValue;
+    /**
+     * @var array<int, ReferenceToken>
+     */
+    private array $referenceTokens;
 
-    private function __construct(string $jsonStringValue)
+    private function __construct(ReferenceToken ...$referenceTokens)
     {
-        $this->jsonStringValue = $jsonStringValue;
+        $this->referenceTokens = $referenceTokens;
     }
 
     /**
@@ -39,42 +42,47 @@ final class JsonPointer
             throw Exception\InvalidJsonPointer::fromJsonString($value);
         }
 
-        return new self($value);
+        $jsonStringValues = \array_slice(
+            \explode('/', $value),
+            1,
+        );
+
+        return new self(...\array_map(static function (string $jsonStringValue): ReferenceToken {
+            return ReferenceToken::fromJsonString($jsonStringValue);
+        }, $jsonStringValues));
     }
 
     public static function fromReferenceTokens(ReferenceToken ...$referenceTokens): self
     {
-        if ([] === $referenceTokens) {
-            return new self('');
-        }
-
-        $jsonStringValue = \sprintf(
-            '/%s',
-            \implode('/', \array_map(static function (ReferenceToken $referenceToken): string {
-                return $referenceToken->toJsonString();
-            }, $referenceTokens)),
-        );
-
-        return new self($jsonStringValue);
+        return new self(...$referenceTokens);
     }
 
     public static function document(): self
     {
-        return new self('');
+        return new self();
     }
 
     public function append(ReferenceToken $referenceToken): self
     {
-        return new self(\sprintf(
-            '%s/%s',
-            $this->jsonStringValue,
-            $referenceToken->toJsonString(),
-        ));
+        $referenceTokens = $this->referenceTokens;
+
+        $referenceTokens[] = $referenceToken;
+
+        return new self(...$referenceTokens);
     }
 
     public function toJsonString(): string
     {
-        return $this->jsonStringValue;
+        if ([] === $this->referenceTokens) {
+            return '';
+        }
+
+        return \sprintf(
+            '/%s',
+            \implode('/', \array_map(static function (ReferenceToken $referenceToken): string {
+                return $referenceToken->toJsonString();
+            }, $this->referenceTokens)),
+        );
     }
 
     /**
@@ -82,18 +90,11 @@ final class JsonPointer
      */
     public function toReferenceTokens(): array
     {
-        $jsonStringValues = \array_slice(
-            \explode('/', $this->jsonStringValue),
-            1,
-        );
-
-        return \array_map(static function (string $jsonStringValue): ReferenceToken {
-            return ReferenceToken::fromJsonString($jsonStringValue);
-        }, $jsonStringValues);
+        return $this->referenceTokens;
     }
 
     public function equals(self $other): bool
     {
-        return $this->jsonStringValue === $other->jsonStringValue;
+        return $this->referenceTokens == $other->referenceTokens;
     }
 }

@@ -46,7 +46,7 @@ final class ReferenceToken
      */
     public static function fromJsonString(string $value): self
     {
-        if (1 !== \preg_match('/^(?P<referenceToken>((?P<unescaped>[\x00-\x2E]|[\x30-\x7D]|[\x7F-\x{10FFFF}])|(?P<escaped>~[01]))*)$/u', $value)) {
+        if (1 !== \preg_match(Pattern::REFERENCE_TOKEN, $value)) {
             throw Exception\InvalidReferenceToken::fromJsonString($value);
         }
 

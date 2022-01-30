@@ -98,10 +98,12 @@ declare(strict_types=1);
 
 use Ergebnis\Json\Pointer;
 
-$two = Pointer\ReferenceToken::fromJsonString('foo~1bar');
 $one = Pointer\ReferenceToken::fromString('foo/bar');
+$two = Pointer\ReferenceToken::fromJsonString('foo~1bar');
+$three = Pointer\ReferenceToken::fromString('foo/9000');
 
-$one->equals($two); // true
+$one->equals($two);   // true
+$one->equals($three); // false
 ```
 
 ### `JsonPointer`
@@ -183,8 +185,10 @@ use Ergebnis\Json\Pointer;
 
 $one = Pointer\JsonPointer::fromJsonString('/foo/bar');
 $two = Pointer\JsonPointer::fromJsonString('/foo~1bar');
+$three = Pointer\JsonPointer::fromUriFragmentIdentifierString('#/foo/bar');
 
-$one->equals($two); // false
+$one->equals($two);   // false
+$one->equals($three); // true
 ```
 
 You can append a `ReferenceToken` to a `JsonPointer`:

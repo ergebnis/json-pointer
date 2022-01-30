@@ -5,6 +5,11 @@
       <code>$referenceTokens</code>
     </MixedPropertyTypeCoercion>
   </file>
+  <file src="src/JsonPointers.php">
+    <MixedPropertyTypeCoercion occurrences="1">
+      <code>$jsonPointers</code>
+    </MixedPropertyTypeCoercion>
+  </file>
   <file src="test/Unit/ReferenceTokenTest.php">
     <TooFewArguments occurrences="3">
       <code>testFromJsonStringReturnsReferenceToken</code>

@@ -206,6 +206,41 @@ $newJsonPointer->toJsonString();                  // '/foo/bar/baz'
 $newJsonPointer->toUriFragmentIdentifierString(); // '#foo/bar/baz'
 ```
 
+### `JsonPointers`
+
+You can create a `JsonPointers` collection from `JsonPointer`s:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Json\Pointer;
+
+$jsonPointers = Pointer\JsonPointers::create(
+    Pointer\JsonPointer::fromJsonString('/foo/bar'),
+    Pointer\JsonPointer::fromJsonString('/foo/9000'),
+);
+```
+
+You can test if a `JsonPointers` collection contains a `JsonPointer`:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Json\Pointer;
+
+$jsonPointers = Pointer\JsonPointers::create(
+    Pointer\JsonPointer::fromJsonString('/foo/bar');
+    Pointer\JsonPointer::fromJsonString('/foo/9000');
+);
+
+$jsonPointers->contains(Pointer\JsonPointer::fromJsonString('/foo'));      // false
+$jsonPointers->contains(Pointer\JsonPointer::fromJsonString('/foo/9000')); // true
+```
+
 ## Changelog
 
 Please have a look at [`CHANGELOG.md`](CHANGELOG.md).

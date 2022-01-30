@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Copyright (c) 2020-2022 Andreas Möller
+ * Copyright (c) 2022 Andreas Möller
  *
  * For the full copyright and license information, please view
  * the LICENSE.md file that was distributed with this source code.
@@ -17,7 +17,7 @@ use Ergebnis\PhpCsFixer;
 $license = License\Type\MIT::markdown(
     __DIR__ . '/LICENSE.md',
     License\Range::since(
-        License\Year::fromString('2020'),
+        License\Year::fromString('2022'),
         new \DateTimeZone('UTC'),
     ),
     License\Holder::fromString('Andreas Möller'),

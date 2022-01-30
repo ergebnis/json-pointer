@@ -17,7 +17,7 @@ use Ergebnis\PhpCsFixer;
 $license = License\Type\MIT::markdown(
     __DIR__ . '/LICENSE.md',
     License\Range::since(
-        License\Year::fromString('2020'),
+        License\Year::fromString('2022'),
         new \DateTimeZone('UTC'),
     ),
     License\Holder::fromString('Andreas Möller'),

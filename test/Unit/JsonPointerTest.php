@@ -16,7 +16,6 @@ namespace Ergebnis\Json\Pointer\Test\Unit;
 use Ergebnis\Json\Pointer\Exception;
 use Ergebnis\Json\Pointer\JsonPointer;
 use Ergebnis\Json\Pointer\ReferenceToken;
-use Ergebnis\Json\Pointer\Test;
 use PHPUnit\Framework;
 
 /**
@@ -29,8 +28,6 @@ use PHPUnit\Framework;
  */
 final class JsonPointerTest extends Framework\TestCase
 {
-    use Test\Util\Helper;
-
     /**
      * @dataProvider provideInvalidJsonStringValue
      */

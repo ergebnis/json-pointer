@@ -171,6 +171,7 @@ $jsonPointer = Pointer\JsonPointer::fromReferenceTokens(...$referenceTokens);
 $jsonPointer->toJsonString();                  // '/foo/bar'
 $jsonPointer->toUriFragmentIdentifierString(); // '#/foo/bar'
 ```
+
 You can compare `JsonPointer`s:
 
 ```php

@@ -57,7 +57,7 @@ $referenceToken->toString();                      // 'foo/9000/😆'
 $referenceToken->toUriFragmentIdentifierString(); // 'foo~19000~1%F0%9F%98%86'
 ```
 
-You can create a `ReferenceToken` from a [URI fragmend identifier `string` value](https://datatracker.ietf.org/doc/html/rfc6901#section-6):
+You can create a `ReferenceToken` from a [URI fragment identifier `string` value](https://datatracker.ietf.org/doc/html/rfc6901#section-6):
 
 ```php
 <?php

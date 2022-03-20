@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 For a full diff see [`2.1.0...main`][2.1.0...main].
 
+## Removed
+
+- Removed `JsonPointers`  ([#48]), by [@localheinz]
+
 ## [`2.1.0`][2.1.0]
 
 For a full diff see [`2.0.0...2.1.0`][2.0.0...2.1.0].
@@ -62,5 +66,6 @@ For a full diff see [`a5ba52c...1.0.0`][a5ba52c...1.0.0].
 [#6]: https://github.com/ergebnis/json-pointer/pull/6
 [#9]: https://github.com/ergebnis/json-pointer/pull/9
 [#17]: https://github.com/ergebnis/json-pointer/pull/17
+[#48]: https://github.com/ergebnis/json-pointer/pull/48
 
 [@localheinz]: https://github.com/localheinz

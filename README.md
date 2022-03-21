@@ -223,8 +223,8 @@ use Ergebnis\Json\Pointer;
 
 $specification = Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/foo/bar');
 
-$specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/foo'));     // true
-$specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/foo/bar')); // false
+$specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/foo'));     // false
+$specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/foo/bar')); // true
 ```
 
 ## Changelog

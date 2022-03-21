@@ -210,24 +210,9 @@ $newJsonPointer->toJsonString();                  // '/foo/bar/baz'
 $newJsonPointer->toUriFragmentIdentifierString(); // '#foo/bar/baz'
 ```
 
-### `JsonPointers`
+### `Specification`
 
-You can create a `JsonPointers` collection from `JsonPointer`s:
-
-```php
-<?php
-
-declare(strict_types=1);
-
-use Ergebnis\Json\Pointer;
-
-$jsonPointers = Pointer\JsonPointers::create(
-    Pointer\JsonPointer::fromJsonString('/foo/bar'),
-    Pointer\JsonPointer::fromJsonString('/foo/9000'),
-);
-```
-
-You can test if a `JsonPointers` collection contains a `JsonPointer`:
+You can create a `Specification` to find out if a `JsonPointer` satisfies it:
 
 ```php
 <?php
@@ -236,13 +221,10 @@ declare(strict_types=1);
 
 use Ergebnis\Json\Pointer;
 
-$jsonPointers = Pointer\JsonPointers::create(
-    Pointer\JsonPointer::fromJsonString('/foo/bar');
-    Pointer\JsonPointer::fromJsonString('/foo/9000');
-);
+$specification = Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/foo/bar');
 
-$jsonPointers->contains(Pointer\JsonPointer::fromJsonString('/foo'));      // false
-$jsonPointers->contains(Pointer\JsonPointer::fromJsonString('/foo/9000')); // true
+$specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/foo'));     // true
+$specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/foo/bar')); // false
 ```
 
 ## Changelog

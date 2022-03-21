@@ -30,28 +30,6 @@ final class SpecificationTest extends Framework\TestCase
 {
     use Test\Util\Helper;
 
-    public function testEqualsIsNotSatisfiedByJsonPointerWhenJsonPointerDoesNotEqualOther(): void
-    {
-        $jsonPointer = JsonPointer::fromJsonString('/foo/bar/baz');
-
-        $other = JsonPointer::fromJsonString('/foo/bar');
-
-        $specification = Specification::equals($other);
-
-        self::assertFalse($specification->isSatisfiedBy($jsonPointer));
-    }
-
-    public function testEqualsIsSatisfiedByJsonPointerWhenJsonPointerEqualsOther(): void
-    {
-        $jsonPointer = JsonPointer::fromJsonString('/foo/bar');
-
-        $other = JsonPointer::fromJsonString('/foo/bar');
-
-        $specification = Specification::equals($other);
-
-        self::assertTrue($specification->isSatisfiedBy($jsonPointer));
-    }
-
     public function testAnyOfIsNotSatisfiedByJsonPointerWhenEmpty(): void
     {
         $jsonPointer = JsonPointer::fromJsonString('/foo/bar/baz');
@@ -83,6 +61,28 @@ final class SpecificationTest extends Framework\TestCase
             Specification::equals(JsonPointer::fromJsonString('/foo/baz')),
             Specification::equals(JsonPointer::fromJsonString('/foo/qux')),
         );
+
+        self::assertTrue($specification->isSatisfiedBy($jsonPointer));
+    }
+
+    public function testEqualsIsNotSatisfiedByJsonPointerWhenJsonPointerDoesNotEqualOther(): void
+    {
+        $jsonPointer = JsonPointer::fromJsonString('/foo/bar/baz');
+
+        $other = JsonPointer::fromJsonString('/foo/bar');
+
+        $specification = Specification::equals($other);
+
+        self::assertFalse($specification->isSatisfiedBy($jsonPointer));
+    }
+
+    public function testEqualsIsSatisfiedByJsonPointerWhenJsonPointerEqualsOther(): void
+    {
+        $jsonPointer = JsonPointer::fromJsonString('/foo/bar');
+
+        $other = JsonPointer::fromJsonString('/foo/bar');
+
+        $specification = Specification::equals($other);
 
         self::assertTrue($specification->isSatisfiedBy($jsonPointer));
     }

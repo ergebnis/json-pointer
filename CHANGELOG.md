@@ -6,7 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
-For a full diff see [`3.0.0...main`][3.0.0...main].
+For a full diff see [`3.1.0...main`][3.1.0...main].
+
+## [`3.1.0`][3.1.0]
+
+For a full diff see [`3.1.0...3.0.0`][2.1.0...3.0.0].
+
+## Added
+
+- Added `Specification::closure()` ([#56]), by [@localheinz]
 
 ## [`3.0.0`][3.0.0]
 
@@ -78,5 +86,6 @@ For a full diff see [`a5ba52c...1.0.0`][a5ba52c...1.0.0].
 [#17]: https://github.com/ergebnis/json-pointer/pull/17
 [#48]: https://github.com/ergebnis/json-pointer/pull/48
 [#53]: https://github.com/ergebnis/json-pointer/pull/53
+[#56]: https://github.com/ergebnis/json-pointer/pull/56
 
 [@localheinz]: https://github.com/localheinz

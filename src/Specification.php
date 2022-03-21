@@ -48,6 +48,14 @@ final class Specification
         });
     }
 
+    /**
+     * @param \Closure(JsonPointer):bool $closure
+     */
+    public static function closure(\Closure $closure): self
+    {
+        return new self($closure);
+    }
+
     public static function equals(JsonPointer $other): self
     {
         return new self(static function (JsonPointer $jsonPointer) use ($other): bool {

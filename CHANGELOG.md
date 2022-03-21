@@ -15,6 +15,7 @@ For a full diff see [`3.1.0...3.0.0`][2.1.0...3.0.0].
 ## Added
 
 - Added `Specification::closure()` ([#56]), by [@localheinz]
+- Added `Specification::never()` ([#57]), by [@localheinz]
 
 ## [`3.0.0`][3.0.0]
 
@@ -87,5 +88,6 @@ For a full diff see [`a5ba52c...1.0.0`][a5ba52c...1.0.0].
 [#48]: https://github.com/ergebnis/json-pointer/pull/48
 [#53]: https://github.com/ergebnis/json-pointer/pull/53
 [#56]: https://github.com/ergebnis/json-pointer/pull/56
+[#57]: https://github.com/ergebnis/json-pointer/pull/57
 
 [@localheinz]: https://github.com/localheinz

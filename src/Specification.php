@@ -62,4 +62,11 @@ final class Specification
             return $jsonPointer->equals($other);
         });
     }
+
+    public static function never(): self
+    {
+        return new self(static function (): bool {
+            return false;
+        });
+    }
 }

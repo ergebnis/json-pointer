@@ -243,6 +243,20 @@ $specification = Pointer\Specification::equals(Pointer\JsonPointer::fromJsonStri
 $specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/foo'));     // false
 $specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/foo/bar')); // true
 ```
+You can create a `Specification` that is never satisfied by a `JsonPointer`:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Json\Pointer;
+
+$specification = Pointer\Specification::never();
+
+$specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/foo'));     // false
+$specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/foo/bar')); // false
+```
 
 You can compose `Specification`s to find out if a `JsonPointer` satisfies any of them:
 
@@ -258,6 +272,7 @@ $specification = Pointer\Specification::anyOf(
         return $jsonPointer->toJsonString() === '/foo/bar';
     }),
     Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/foo/baz')),
+    Pointer\Specification::never(),
 );
 
 $specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/foo'));     // false

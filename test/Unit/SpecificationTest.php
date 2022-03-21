@@ -108,4 +108,13 @@ final class SpecificationTest extends Framework\TestCase
 
         self::assertTrue($specification->isSatisfiedBy($jsonPointer));
     }
+
+    public function testNeverIsNotSatisfiedByAnyJsonPointer(): void
+    {
+        $jsonPointer = JsonPointer::fromJsonString('/foo/bar');
+
+        $specification = Specification::never();
+
+        self::assertFalse($specification->isSatisfiedBy($jsonPointer));
+    }
 }

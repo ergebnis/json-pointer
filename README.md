@@ -227,6 +227,24 @@ $specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/foo'));     
 $specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/foo/bar')); // true
 ```
 
+You can compose `Specification`s to find out if a `JsonPointer` satisfies any of them:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Json\Pointer;
+
+$specification = Pointer\Specification::anyOf(
+    Pointer\JsonPointer::fromJsonString('/foo/bar'),
+    Pointer\JsonPointer::fromJsonString('/foo/baz'),
+);
+
+$specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/foo'));     // false
+$specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/foo/bar')); // true
+$specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/foo/baz')); // true
+```
 ## Changelog
 
 Please have a look at [`CHANGELOG.md`](CHANGELOG.md).

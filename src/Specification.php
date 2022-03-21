@@ -35,6 +35,19 @@ final class Specification
         return $closure($jsonPointer);
     }
 
+    public static function anyOf(self ...$specifications): self
+    {
+        return new self(static function (JsonPointer $jsonPointer) use ($specifications): bool {
+            foreach ($specifications as $specification) {
+                if ($specification->isSatisfiedBy($jsonPointer)) {
+                    return true;
+                }
+            }
+
+            return false;
+        });
+    }
+
     public static function equals(JsonPointer $other): self
     {
         return new self(static function (JsonPointer $jsonPointer) use ($other) {

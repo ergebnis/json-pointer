@@ -10,7 +10,7 @@ For a full diff see [`3.1.0...main`][3.1.0...main].
 
 ## [`3.1.0`][3.1.0]
 
-For a full diff see [`3.1.0...3.0.0`][2.1.0...3.0.0].
+For a full diff see [`3.0.0...3.1.0`][3.0.0...3.1.0].
 
 ## Added
 
@@ -72,12 +72,15 @@ For a full diff see [`a5ba52c...1.0.0`][a5ba52c...1.0.0].
 [1.0.0]: https://github.com/ergebnis/json-pointer/releases/tag/1.0.0
 [2.0.0]: https://github.com/ergebnis/json-pointer/releases/tag/2.0.0
 [2.1.0]: https://github.com/ergebnis/json-pointer/releases/tag/2.1.0
+[3.0.0]: https://github.com/ergebnis/json-pointer/releases/tag/3.0.0
+[3.1.0]: https://github.com/ergebnis/json-pointer/releases/tag/3.1.0
 
 [a5ba52c...1.0.0]: https://github.com/ergebnis/json-pointer/compare/a5ba52c...1.0.0
 [1.0.0...main]: https://github.com/ergebnis/json-pointer/compare/1.0.0...main
 [2.0.0...2.1.0]: https://github.com/ergebnis/json-pointer/compare/2.0.0...2.1.0
 [2.1.0...3.0.0]: https://github.com/ergebnis/json-pointer/compare/2.1.0...3.0.0
-[3.0.0...main]: https://github.com/ergebnis/json-pointer/compare/3.0.0...main
+[3.0.0...3.1.0]: https://github.com/ergebnis/json-pointer/compare/3.0.0...3.1.0
+[3.1.0...main]: https://github.com/ergebnis/json-pointer/compare/3.1.0...main
 
 [#1]: https://github.com/ergebnis/json-pointer/pull/1
 [#2]: https://github.com/ergebnis/json-pointer/pull/2

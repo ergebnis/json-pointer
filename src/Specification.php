@@ -35,6 +35,13 @@ final class Specification
         return $closure($jsonPointer);
     }
 
+    public static function always(): self
+    {
+        return new self(static function (): bool {
+            return true;
+        });
+    }
+
     public static function anyOf(self ...$specifications): self
     {
         return new self(static function (JsonPointer $jsonPointer) use ($specifications): bool {

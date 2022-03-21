@@ -212,6 +212,20 @@ $newJsonPointer->toUriFragmentIdentifierString(); // '#foo/bar/baz'
 
 ### `Specification`
 
+You can create a `Specification` that is always satisfied by a `JsonPointer`:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Json\Pointer;
+
+$specification = Pointer\Specification::always();
+
+$specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/foo'));     // true
+$specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/foo/bar')); // true
+```
 You can create a `Specification` that is satisfied when a closure returns `true` for a `JsonPointer`:
 
 ```php

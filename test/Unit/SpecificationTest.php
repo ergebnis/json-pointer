@@ -30,7 +30,7 @@ final class SpecificationTest extends Framework\TestCase
 {
     use Test\Util\Helper;
 
-    public function testEqualsIsNotSatisifedByJsonPointerWhenJsonPointerDoesNotEqualOther(): void
+    public function testEqualsIsNotSatisfiedByJsonPointerWhenJsonPointerDoesNotEqualOther(): void
     {
         $jsonPointer = JsonPointer::fromJsonString('/foo/bar/baz');
 
@@ -41,7 +41,7 @@ final class SpecificationTest extends Framework\TestCase
         self::assertFalse($specification->isSatisfiedBy($jsonPointer));
     }
 
-    public function testEqualsIsSatisifedByJsonPointerWhenJsonPointerEqualsOther(): void
+    public function testEqualsIsSatisfiedByJsonPointerWhenJsonPointerEqualsOther(): void
     {
         $jsonPointer = JsonPointer::fromJsonString('/foo/bar');
 

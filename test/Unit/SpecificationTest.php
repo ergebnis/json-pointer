@@ -30,6 +30,15 @@ final class SpecificationTest extends Framework\TestCase
 {
     use Test\Util\Helper;
 
+    public function testAlwaysIsAlwaysSatisfiedByAnyJsonPointer(): void
+    {
+        $jsonPointer = JsonPointer::fromJsonString('/foo/bar');
+
+        $specification = Specification::always();
+
+        self::assertTrue($specification->isSatisfiedBy($jsonPointer));
+    }
+
     public function testAnyOfIsNotSatisfiedByJsonPointerWhenEmpty(): void
     {
         $jsonPointer = JsonPointer::fromJsonString('/foo/bar/baz');

@@ -53,7 +53,9 @@ final class Specification
      */
     public static function closure(\Closure $closure): self
     {
-        return new self($closure);
+        return new self(static function (JsonPointer $jsonPointer) use ($closure): bool {
+            return true === $closure($jsonPointer);
+        });
     }
 
     public static function equals(JsonPointer $other): self

@@ -51,4 +51,39 @@ final class SpecificationTest extends Framework\TestCase
 
         self::assertTrue($specification->isSatisfiedBy($jsonPointer));
     }
+
+    public function testAnyOfIsNotSatisfiedByJsonPointerWhenEmpty(): void
+    {
+        $jsonPointer = JsonPointer::fromJsonString('/foo/bar/baz');
+
+        $specification = Specification::anyOf();
+
+        self::assertFalse($specification->isSatisfiedBy($jsonPointer));
+    }
+
+    public function testAnyOfIsNotSatisfiedByJsonPointerWhenNoneOfTheSpecificationsAreSatisfiedByJsonPointer(): void
+    {
+        $jsonPointer = JsonPointer::fromJsonString('/foo/bar/baz');
+
+        $specification = Specification::anyOf(
+            Specification::equals(JsonPointer::fromJsonString('/foo/bar')),
+            Specification::equals(JsonPointer::fromJsonString('/foo/baz')),
+            Specification::equals(JsonPointer::fromJsonString('/foo/qux')),
+        );
+
+        self::assertFalse($specification->isSatisfiedBy($jsonPointer));
+    }
+
+    public function testAnyOfIsNotSatisfiedByJsonPointerWhenAnyOfTheSpecificationsIsSatisfiedByJsonPointer(): void
+    {
+        $jsonPointer = JsonPointer::fromJsonString('/foo/baz');
+
+        $specification = Specification::anyOf(
+            Specification::equals(JsonPointer::fromJsonString('/foo/bar')),
+            Specification::equals(JsonPointer::fromJsonString('/foo/baz')),
+            Specification::equals(JsonPointer::fromJsonString('/foo/qux')),
+        );
+
+        self::assertTrue($specification->isSatisfiedBy($jsonPointer));
+    }
 }

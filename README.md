@@ -237,8 +237,8 @@ declare(strict_types=1);
 use Ergebnis\Json\Pointer;
 
 $specification = Pointer\Specification::anyOf(
-    Pointer\JsonPointer::fromJsonString('/foo/bar'),
-    Pointer\JsonPointer::fromJsonString('/foo/baz'),
+    Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/foo/bar')),
+    Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/foo/baz')),
 );
 
 $specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/foo'));     // false

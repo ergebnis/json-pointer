@@ -50,7 +50,7 @@ final class Specification
 
     public static function equals(JsonPointer $other): self
     {
-        return new self(static function (JsonPointer $jsonPointer) use ($other) {
+        return new self(static function (JsonPointer $jsonPointer) use ($other): bool {
             return $jsonPointer->equals($other);
         });
     }

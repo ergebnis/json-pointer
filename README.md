@@ -226,6 +226,7 @@ $specification = Pointer\Specification::always();
 $specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/foo'));     // true
 $specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/foo/bar')); // true
 ```
+
 You can create a `Specification` that is satisfied when a closure returns `true` for a `JsonPointer`:
 
 ```php
@@ -257,6 +258,7 @@ $specification = Pointer\Specification::equals(Pointer\JsonPointer::fromJsonStri
 $specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/foo'));     // false
 $specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/foo/bar')); // true
 ```
+
 You can create a `Specification` that is never satisfied by a `JsonPointer`:
 
 ```php

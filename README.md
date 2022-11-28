@@ -147,11 +147,10 @@ declare(strict_types=1);
 
 use Ergebnis\Json\Pointer;
 
-$jsonPointer = Pointer\JsonPointer::fromJsonString('#/foo/bar/%F0%9F%98%86');
+$jsonPointer = Pointer\JsonPointer::fromUriFragmentIdentifierString('#/foo/bar/%F0%9F%98%86');
 
 $jsonPointer->toJsonString();                  // '/foo/bar/😆'
 $jsonPointer->toUriFragmentIdentifierString(); // '#/foo/bar/%F0%9F%98%86'
-$jsonPointer = Pointer\JsonPointer::fromUriFragmentIdentifierString('#foo/bar');
 ```
 
 You can create a `JsonPointer` from `ReferenceToken`s:

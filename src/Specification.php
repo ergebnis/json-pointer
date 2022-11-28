@@ -72,4 +72,11 @@ final class Specification
             return false;
         });
     }
+
+    public static function not(self $specification): self
+    {
+        return new self(static function (JsonPointer $jsonPointer) use ($specification): bool {
+            return !$specification->isSatisfiedBy($jsonPointer);
+        });
+    }
 }

@@ -115,7 +115,7 @@ final class ReferenceTokenTest extends Framework\TestCase
     public function testFromJsonStringReturnsReferenceToken(
         string $value,
         string $jsonStringValue,
-        string $uriFragmentIdentifierStringValue
+        string $uriFragmentIdentifierStringValue,
     ): void {
         $referenceToken = ReferenceToken::fromJsonString($jsonStringValue);
 
@@ -130,7 +130,7 @@ final class ReferenceTokenTest extends Framework\TestCase
     public function testFromStringReturnsReferenceToken(
         string $value,
         string $jsonStringValue,
-        string $uriFragmentIdentifierStringValue
+        string $uriFragmentIdentifierStringValue,
     ): void {
         $referenceToken = ReferenceToken::fromString($value);
 
@@ -145,7 +145,7 @@ final class ReferenceTokenTest extends Framework\TestCase
     public function testFromUriFragmentIdentifierStringReturnsReferenceToken(
         string $value,
         string $jsonStringValue,
-        string $uriFragmentIdentifierStringValue
+        string $uriFragmentIdentifierStringValue,
     ): void {
         $referenceToken = ReferenceToken::fromUriFragmentIdentifierString($uriFragmentIdentifierStringValue);
 

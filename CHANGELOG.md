@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 For a full diff see [`3.1.0...main`][3.1.0...main].
 
+## Changed
+
 - Dropped support for PHP 7.4 ([#119]), by [@localheinz]
 
 ## [`3.1.0`][3.1.0]

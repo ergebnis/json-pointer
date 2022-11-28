@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 For a full diff see [`3.1.0...main`][3.1.0...main].
 
+## Added
+
+- Added `Specification::not()` ([#123]), by [@localheinz]
+
 ## Changed
 
 - Dropped support for PHP 7.4 ([#119]), by [@localheinz]
@@ -99,5 +103,6 @@ For a full diff see [`a5ba52c...1.0.0`][a5ba52c...1.0.0].
 [#57]: https://github.com/ergebnis/json-pointer/pull/57
 [#58]: https://github.com/ergebnis/json-pointer/pull/58
 [#119]: https://github.com/ergebnis/json-pointer/pull/119
+[#123]: https://github.com/ergebnis/json-pointer/pull/123
 
 [@localheinz]: https://github.com/localheinz

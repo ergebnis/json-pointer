@@ -16,16 +16,10 @@ namespace Ergebnis\Json\Pointer;
 final class Specification
 {
     /**
-     * @psalm-var \Closure(JsonPointer):bool
-     */
-    private \Closure $closure;
-
-    /**
      * @param \Closure(JsonPointer):bool $closure
      */
-    private function __construct(\Closure $closure)
+    private function __construct(private \Closure $closure)
     {
-        $this->closure = $closure;
     }
 
     public function isSatisfiedBy(JsonPointer $jsonPointer): bool

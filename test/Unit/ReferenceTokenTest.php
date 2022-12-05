@@ -158,7 +158,7 @@ final class ReferenceTokenTest extends Framework\TestCase
      * @see https://datatracker.ietf.org/doc/html/rfc6901#section-5
      * @see https://datatracker.ietf.org/doc/html/rfc6901#section-6
      *
-     * @return \Generator<string, array{0: string, 1: string, 1: string}>
+     * @return \Generator<string, array{0: string, 1: string, 2: string}>
      */
     public function provideValueJsonStringValueAndUriFragmentIdentifierStringValue(): \Generator
     {

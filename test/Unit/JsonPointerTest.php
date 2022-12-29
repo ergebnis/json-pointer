@@ -158,18 +158,18 @@ final class JsonPointerTest extends Framework\TestCase
                 '#',
                 [],
             ],
-            'document-root' => [
-                '/',
-                '#/',
-                [
-                    ReferenceToken::fromString(''),
-                ],
-            ],
             'property-caret' => [
                 '/^',
                 '#/%5E',
                 [
                     ReferenceToken::fromString('^'),
+                ],
+            ],
+            'property-empty' => [
+                '/',
+                '#/',
+                [
+                    ReferenceToken::fromString(''),
                 ],
             ],
             'property-percent' => [

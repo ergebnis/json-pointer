@@ -183,6 +183,11 @@ final class ReferenceTokenTest extends Framework\TestCase
                 '^',
                 '%5E',
             ],
+            'empty' => [
+                '',
+                '',
+                '',
+            ],
             'percent' => [
                 '%',
                 '%',

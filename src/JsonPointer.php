@@ -132,6 +132,6 @@ final class JsonPointer
 
     public function equals(self $other): bool
     {
-        return $this->referenceTokens == $other->referenceTokens;
+        return $this->toJsonString() === $other->toJsonString();
     }
 }

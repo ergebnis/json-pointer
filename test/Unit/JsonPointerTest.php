@@ -449,7 +449,7 @@ final class JsonPointerTest extends Framework\TestCase
         self::assertFalse($one->equals($two));
     }
 
-    public function testEqualsReturnsFalseWhenValueIsSame(): void
+    public function testEqualsReturnsTrueWhenValueIsSame(): void
     {
         $value = '/foo/bar/0/baz~0';
 

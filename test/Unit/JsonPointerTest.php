@@ -43,7 +43,7 @@ final class JsonPointerTest extends Framework\TestCase
      *
      * @return \Generator<string, array{0: string}>
      */
-    public function provideInvalidJsonStringValue(): \Generator
+    public static function provideInvalidJsonStringValue(): \Generator
     {
         $values = [
             'does-not-start-with-forward-slash' => 'foo',
@@ -129,7 +129,7 @@ final class JsonPointerTest extends Framework\TestCase
      *
      * @return \Generator<string, array{0: string, 1: string, 2: array<int, ReferenceToken>}>
      */
-    public function provideJsonStringValueUriFragmentIdentifierStringValueAndReferenceTokens(): \Generator
+    public static function provideJsonStringValueUriFragmentIdentifierStringValueAndReferenceTokens(): \Generator
     {
         $values = [
             'array-index-0' => [
@@ -347,7 +347,7 @@ final class JsonPointerTest extends Framework\TestCase
      *
      * @return \Generator<string, array{0: string}>
      */
-    public function provideInvalidUriFragmentIdentifierStringValue(): \Generator
+    public static function provideInvalidUriFragmentIdentifierStringValue(): \Generator
     {
         $values = [
             'does-not-start-with-hash' => 'foo',
@@ -402,7 +402,7 @@ final class JsonPointerTest extends Framework\TestCase
     /**
      * @return \Generator<string, array{0: JsonPointer, 1: ReferenceToken, 2: JsonPointer}>
      */
-    public function provideJsonPointerReferenceTokenAndExpectedJsonPointer(): \Generator
+    public static function provideJsonPointerReferenceTokenAndExpectedJsonPointer(): \Generator
     {
         $values = [
             'document-and-reference-token-from-unescaped-string' => [

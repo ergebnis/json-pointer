@@ -44,7 +44,7 @@ final class ReferenceTokenTest extends Framework\TestCase
      *
      * @return \Generator<string, array{0: string}>
      */
-    public function provideInvalidJsonStringValue(): \Generator
+    public static function provideInvalidJsonStringValue(): \Generator
     {
         $values = [
             'property-with-slash-forward' => 'foo/bar',
@@ -89,7 +89,7 @@ final class ReferenceTokenTest extends Framework\TestCase
      *
      * @return \Generator<string, array{0: string}>
      */
-    public function provideInvalidUriFragmentIdentifierStringValue(): \Generator
+    public static function provideInvalidUriFragmentIdentifierStringValue(): \Generator
     {
         $values = [
             'property-with-caret' => 'foo^bar',
@@ -160,7 +160,7 @@ final class ReferenceTokenTest extends Framework\TestCase
      *
      * @return \Generator<string, array{0: string, 1: string, 2: string}>
      */
-    public function provideValueJsonStringValueAndUriFragmentIdentifierStringValue(): \Generator
+    public static function provideValueJsonStringValueAndUriFragmentIdentifierStringValue(): \Generator
     {
         $values = [
             'array-index-0' => [

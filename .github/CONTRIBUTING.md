@@ -6,7 +6,6 @@ For details, take a look at the following workflow configuration files:
 
 - [`workflows/integrate.yaml`](workflows/integrate.yaml)
 - [`workflows/merge.yaml`](workflows/merge.yaml)
-- [`workflows/prune.yaml`](workflows/prune.yaml)
 - [`workflows/release.yaml`](workflows/release.yaml)
 - [`workflows/renew.yaml`](workflows/renew.yaml)
 - [`workflows/triage.yaml`](workflows/triage.yaml)
@@ -47,9 +46,45 @@ make dependency-analysis
 
 to run a dependency analysis.
 
+## Mutation Tests
+
+We are using [`infection/infection`](https://github.com/infection/infection) to ensure a minimum quality of the tests.
+
+Enable `Xdebug` and run
+
+```sh
+make mutation-tests
+```
+
+to run mutation tests.
+
+## Refactoring
+
+We are using [`rector/rector`](https://github.com/rectorphp/rector) to automatically refactor code.
+
+Run
+
+```sh
+make refactoring
+```
+
+to automatically refactor code.
+
+## Security Analysis
+
+We are using [`composer`](https://github.com/composer/composer) to run a security analysis.
+
+Run
+
+```sh
+make security-analysis
+```
+
+to run a security analysis.
+
 ## Static Code Analysis
 
-We are using [`vimeo/psalm`](https://github.com/vimeo/psalm) to statically analyze the code.
+We are using [`phpstan/phpstan`](https://github.com/phpstan/phpstan) and [`vimeo/psalm`](https://github.com/vimeo/psalm) to statically analyze the code.
 
 Run
 
@@ -83,18 +118,6 @@ make tests
 
 to run all the tests.
 
-## Mutation Tests
-
-We are using [`infection/infection`](https://github.com/infection/infection) to ensure a minimum quality of the tests.
-
-Enable `pcov` or `Xdebug` and run
-
-```sh
-make mutation-tests
-```
-
-to run mutation tests.
-
 ## Extra lazy?
 
 Run
@@ -103,7 +126,7 @@ Run
 make
 ```
 
-to enforce coding standards, run a static code analysis, and run tests!
+to automatically refactor code, enforce coding standards, run a static code analysis, and run tests!
 
 ## Help
 

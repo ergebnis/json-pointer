@@ -17,11 +17,7 @@ use Ergebnis\Json\Pointer\Exception;
 use Ergebnis\Json\Pointer\Test;
 use PHPUnit\Framework;
 
-/**
- * @internal
- *
- * @covers \Ergebnis\Json\Pointer\Exception\InvalidReferenceToken
- */
+#[Framework\Attributes\CoversClass(Exception\InvalidReferenceToken::class)]
 final class InvalidReferenceTokenTest extends Framework\TestCase
 {
     use Test\Util\Helper;

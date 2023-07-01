@@ -18,7 +18,7 @@ final class Specification
     /**
      * @param \Closure(JsonPointer):bool $closure
      */
-    private function __construct(private \Closure $closure)
+    private function __construct(private readonly \Closure $closure)
     {
     }
 

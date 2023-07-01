@@ -13,25 +13,19 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Pointer\Test\Unit;
 
+use Ergebnis\DataProvider;
 use Ergebnis\Json\Pointer\Exception;
 use Ergebnis\Json\Pointer\ReferenceToken;
 use Ergebnis\Json\Pointer\Test;
 use PHPUnit\Framework;
 
-/**
- * @internal
- *
- * @covers \Ergebnis\Json\Pointer\ReferenceToken
- *
- * @uses \Ergebnis\Json\Pointer\Exception\InvalidReferenceToken
- */
+#[Framework\Attributes\CoversClass(ReferenceToken::class)]
+#[Framework\Attributes\UsesClass(Exception\InvalidReferenceToken::class)]
 final class ReferenceTokenTest extends Framework\TestCase
 {
     use Test\Util\Helper;
 
-    /**
-     * @dataProvider provideInvalidJsonStringValue
-     */
+    #[Framework\Attributes\DataProvider('provideInvalidJsonStringValue')]
     public function testFromJsonStringRejectsInvalidValue(string $value): void
     {
         $this->expectException(Exception\InvalidReferenceToken::class);
@@ -74,9 +68,7 @@ final class ReferenceTokenTest extends Framework\TestCase
         }
     }
 
-    /**
-     * @dataProvider provideInvalidUriFragmentIdentifierStringValue
-     */
+    #[Framework\Attributes\DataProvider('provideInvalidUriFragmentIdentifierStringValue')]
     public function testFromUriFragmentIdentifierStringRejectsInvalidValue(string $value): void
     {
         $this->expectException(Exception\InvalidReferenceToken::class);
@@ -109,9 +101,7 @@ final class ReferenceTokenTest extends Framework\TestCase
         }
     }
 
-    /**
-     * @dataProvider provideValueJsonStringValueAndUriFragmentIdentifierStringValue
-     */
+    #[Framework\Attributes\DataProvider('provideValueJsonStringValueAndUriFragmentIdentifierStringValue')]
     public function testFromJsonStringReturnsReferenceToken(
         string $value,
         string $jsonStringValue,
@@ -124,9 +114,7 @@ final class ReferenceTokenTest extends Framework\TestCase
         self::assertSame($uriFragmentIdentifierStringValue, $referenceToken->toUriFragmentIdentifierString());
     }
 
-    /**
-     * @dataProvider provideValueJsonStringValueAndUriFragmentIdentifierStringValue
-     */
+    #[Framework\Attributes\DataProvider('provideValueJsonStringValueAndUriFragmentIdentifierStringValue')]
     public function testFromStringReturnsReferenceToken(
         string $value,
         string $jsonStringValue,
@@ -139,9 +127,7 @@ final class ReferenceTokenTest extends Framework\TestCase
         self::assertSame($uriFragmentIdentifierStringValue, $referenceToken->toUriFragmentIdentifierString());
     }
 
-    /**
-     * @dataProvider provideValueJsonStringValueAndUriFragmentIdentifierStringValue
-     */
+    #[Framework\Attributes\DataProvider('provideValueJsonStringValueAndUriFragmentIdentifierStringValue')]
     public function testFromUriFragmentIdentifierStringReturnsReferenceToken(
         string $value,
         string $jsonStringValue,
@@ -299,9 +285,7 @@ final class ReferenceTokenTest extends Framework\TestCase
         }
     }
 
-    /**
-     * @dataProvider \Ergebnis\DataProvider\IntProvider::lessThanZero()
-     */
+    #[Framework\Attributes\DataProviderExternal(DataProvider\IntProvider::class, 'lessThanZero')]
     public function testFromIntRejectsInvalidValue(int $value): void
     {
         $this->expectException(Exception\InvalidReferenceToken::class);
@@ -309,10 +293,8 @@ final class ReferenceTokenTest extends Framework\TestCase
         ReferenceToken::fromInt($value);
     }
 
-    /**
-     * @dataProvider \Ergebnis\DataProvider\IntProvider::greaterThanZero()
-     * @dataProvider \Ergebnis\DataProvider\IntProvider::zero()
-     */
+    #[Framework\Attributes\DataProviderExternal(DataProvider\IntProvider::class, 'greaterThanZero')]
+    #[Framework\Attributes\DataProviderExternal(DataProvider\IntProvider::class, 'zero')]
     public function testFromIntReturnsReferenceToken(int $value): void
     {
         $referenceToken = ReferenceToken::fromInt($value);

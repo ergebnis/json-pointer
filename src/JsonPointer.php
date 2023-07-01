@@ -23,7 +23,7 @@ final class JsonPointer
     /**
      * @var array<int, ReferenceToken>
      */
-    private array $referenceTokens;
+    private readonly array $referenceTokens;
 
     private function __construct(ReferenceToken ...$referenceTokens)
     {

@@ -17,11 +17,7 @@ use Ergebnis\Json\Pointer\Exception;
 use Ergebnis\Json\Pointer\Test;
 use PHPUnit\Framework;
 
-/**
- * @internal
- *
- * @covers \Ergebnis\Json\Pointer\Exception\InvalidJsonPointer
- */
+#[Framework\Attributes\CoversClass(Exception\InvalidJsonPointer::class)]
 final class InvalidJsonPointerTest extends Framework\TestCase
 {
     use Test\Util\Helper;

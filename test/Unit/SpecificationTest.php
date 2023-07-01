@@ -14,18 +14,14 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Pointer\Test\Unit;
 
 use Ergebnis\Json\Pointer\JsonPointer;
+use Ergebnis\Json\Pointer\ReferenceToken;
 use Ergebnis\Json\Pointer\Specification;
 use Ergebnis\Json\Pointer\Test;
 use PHPUnit\Framework;
 
-/**
- * @internal
- *
- * @covers \Ergebnis\Json\Pointer\Specification
- *
- * @uses \Ergebnis\Json\Pointer\JsonPointer
- * @uses \Ergebnis\Json\Pointer\ReferenceToken
- */
+#[Framework\Attributes\CoversClass(Specification::class)]
+#[Framework\Attributes\UsesClass(JsonPointer::class)]
+#[Framework\Attributes\UsesClass(ReferenceToken::class)]
 final class SpecificationTest extends Framework\TestCase
 {
     use Test\Util\Helper;

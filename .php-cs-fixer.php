@@ -26,9 +26,13 @@ $license = License\Type\MIT::markdown(
 
 $license->save();
 
-$config = PhpCsFixer\Config\Factory::fromRuleSet(new PhpCsFixer\Config\RuleSet\Php81($license->header()), [
-    'strict_comparison' => false,
-]);
+$ruleSet = PhpCsFixer\Config\RuleSet\Php81::create()
+    ->withHeader($license->header())
+    ->withRules(PhpCsFixer\Config\Rules::fromArray([
+        'strict_comparison' => false,
+    ]));
+
+$config = PhpCsFixer\Config\Factory::fromRuleSet($ruleSet);
 
 $config->getFinder()
     ->exclude([

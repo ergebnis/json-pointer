@@ -18,7 +18,8 @@
   "homepage": "https://github.com/ergebnis/json-pointer",
   "support": {
     "issues": "https://github.com/ergebnis/json-pointer/issues",
-    "source": "https://github.com/ergebnis/json-pointer"
+    "source": "https://github.com/ergebnis/json-pointer",
+    "security": "https://github.com/ergebnis/json-pointer/blob/main/.github/SECURITY.md"
   },
   "require": {
     "php": "~8.1.0 || ~8.2.0"

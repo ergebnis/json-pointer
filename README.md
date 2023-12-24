@@ -310,6 +310,7 @@ $specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/foo'));     
 $specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/foo/bar')); // true
 $specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/foo/baz')); // true
 ```
+
 ## Changelog
 
 The maintainers of this project record notable changes to this project in a [changelog](CHANGELOG.md).

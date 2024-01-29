@@ -11,6 +11,7 @@ For a full diff see [`3.3.0...main`][3.3.0...main].
 ### Changed
 
 - Added support for PHP 8.0 ([#339]), by [@localheinz]
+- Added support for PHP 7.4 ([#340]), by [@localheinz]
 
 ## [`3.3.0`][3.3.0]
 
@@ -128,5 +129,6 @@ For a full diff see [`a5ba52c...1.0.0`][a5ba52c...1.0.0].
 [#209]: https://github.com/ergebnis/json-pointer/pull/209
 [#271]: https://github.com/ergebnis/json-pointer/pull/271
 [#339]: https://github.com/ergebnis/json-pointer/pull/339
+[#340]: https://github.com/ergebnis/json-pointer/pull/340
 
 [@localheinz]: https://github.com/localheinz

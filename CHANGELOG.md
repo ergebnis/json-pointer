@@ -12,7 +12,7 @@ For a full diff see [`3.3.0...main`][3.3.0...main].
 
 For a full diff see [`3.2.0...3.3.0`][3.2.0...3.3.0].
 
-## Changed
+### Changed
 
 - Dropped support for PHP 8.0 ([#209]), by [@localheinz]
 - Added support for PHP 8.3 ([#271]), by [@localheinz]
@@ -21,11 +21,11 @@ For a full diff see [`3.2.0...3.3.0`][3.2.0...3.3.0].
 
 For a full diff see [`3.1.0...3.2.0`][3.1.0...3.2.0].
 
-## Added
+### Added
 
 - Added `Specification::not()` ([#123]), by [@localheinz]
 
-## Changed
+### Changed
 
 - Dropped support for PHP 7.4 ([#119]), by [@localheinz]
 
@@ -33,7 +33,7 @@ For a full diff see [`3.1.0...3.2.0`][3.1.0...3.2.0].
 
 For a full diff see [`3.0.0...3.1.0`][3.0.0...3.1.0].
 
-## Added
+### Added
 
 - Added `Specification::closure()` ([#56]), by [@localheinz]
 - Added `Specification::never()` ([#57]), by [@localheinz]
@@ -43,12 +43,12 @@ For a full diff see [`3.0.0...3.1.0`][3.0.0...3.1.0].
 
 For a full diff see [`2.1.0...3.0.0`][2.1.0...3.0.0].
 
-## Added
+### Added
 
 - Added `Specification` ([#50]), by [@localheinz]
 - Added `Specification::anyOf()` ([#53]), by [@localheinz]
 
-## Removed
+### Removed
 
 - Removed `JsonPointers`  ([#48]), by [@localheinz]
 
@@ -56,7 +56,7 @@ For a full diff see [`2.1.0...3.0.0`][2.1.0...3.0.0].
 
 For a full diff see [`2.0.0...2.1.0`][2.0.0...2.1.0].
 
-## Added
+### Added
 
 - Added `JsonPointers` as a value object  ([#17]), by [@localheinz]
 
@@ -64,12 +64,12 @@ For a full diff see [`2.0.0...2.1.0`][2.0.0...2.1.0].
 
 For a full diff see [`1.0.0...2.0.0`][1.0.0...2.0.0].
 
-## Added
+### Added
 
 - Added named constructors `JsonPointer::fromUriFragmentIdentifierString()` and `ReferenceToken::fromUriFragmentIdentifierString()` to allow creation from URI fragment identifier representations ([#6]), by [@localheinz]
 - Added named constructor `JsonPointer::fromReferenceTokens()` to allow creation of `JsonPointer` from `ReferenceToken`s ([#9]), by [@localheinz]
 
-## Changed
+### Changed
 
 - Renamed named constructors and accessors of `Exception\InvalidJsonPointer`, `JsonPointer`, and `ReferenceToken` ([#4]) and ([#5]), by [@localheinz]
 

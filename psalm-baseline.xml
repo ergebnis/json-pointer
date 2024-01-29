@@ -5,19 +5,4 @@
       <code>$referenceTokens</code>
     </MixedPropertyTypeCoercion>
   </file>
-  <file src="test/Unit/JsonPointerTest.php">
-    <PossiblyUnusedMethod>
-      <code>provideInvalidJsonStringValue</code>
-      <code>provideInvalidUriFragmentIdentifierStringValue</code>
-      <code>provideJsonPointerReferenceTokenAndExpectedJsonPointer</code>
-      <code>provideJsonStringValueUriFragmentIdentifierStringValueAndReferenceTokens</code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="test/Unit/ReferenceTokenTest.php">
-    <PossiblyUnusedMethod>
-      <code>provideInvalidJsonStringValue</code>
-      <code>provideInvalidUriFragmentIdentifierStringValue</code>
-      <code>provideValueJsonStringValueAndUriFragmentIdentifierStringValue</code>
-    </PossiblyUnusedMethod>
-  </file>
 </files>

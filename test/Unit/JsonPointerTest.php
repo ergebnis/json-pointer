@@ -18,12 +18,17 @@ use Ergebnis\Json\Pointer\JsonPointer;
 use Ergebnis\Json\Pointer\ReferenceToken;
 use PHPUnit\Framework;
 
-#[Framework\Attributes\CoversClass(JsonPointer::class)]
-#[Framework\Attributes\UsesClass(Exception\InvalidJsonPointer::class)]
-#[Framework\Attributes\UsesClass(ReferenceToken::class)]
+/**
+ * @covers \Ergebnis\Json\Pointer\JsonPointer
+ *
+ * @uses \Ergebnis\Json\Pointer\Exception\InvalidJsonPointer
+ * @uses \Ergebnis\Json\Pointer\ReferenceToken
+ */
 final class JsonPointerTest extends Framework\TestCase
 {
-    #[Framework\Attributes\DataProvider('provideInvalidJsonStringValue')]
+    /**
+     * @dataProvider provideInvalidJsonStringValue
+     */
     public function testFromJsonStringRejectsInvalidValue(string $value): void
     {
         $this->expectException(Exception\InvalidJsonPointer::class);
@@ -36,7 +41,7 @@ final class JsonPointerTest extends Framework\TestCase
      *
      * @return \Generator<string, array{0: string}>
      */
-    public static function provideInvalidJsonStringValue(): \Generator
+    public static function provideInvalidJsonStringValue(): iterable
     {
         $values = [
             'does-not-start-with-forward-slash' => 'foo',
@@ -67,9 +72,10 @@ final class JsonPointerTest extends Framework\TestCase
     }
 
     /**
+     * @dataProvider provideJsonStringValueUriFragmentIdentifierStringValueAndReferenceTokens
+     *
      * @param array<int, ReferenceToken> $referenceTokens
      */
-    #[Framework\Attributes\DataProvider('provideJsonStringValueUriFragmentIdentifierStringValueAndReferenceTokens')]
     public function testFromJsonStringReturnsJsonPointer(
         string $jsonStringValue,
         string $uriFragmentIdentifierStringValue,
@@ -83,9 +89,10 @@ final class JsonPointerTest extends Framework\TestCase
     }
 
     /**
+     * @dataProvider provideJsonStringValueUriFragmentIdentifierStringValueAndReferenceTokens
+     *
      * @param array<int, ReferenceToken> $referenceTokens
      */
-    #[Framework\Attributes\DataProvider('provideJsonStringValueUriFragmentIdentifierStringValueAndReferenceTokens')]
     public function testFromUriFragmentIdentifierStringReturnsJsonPointer(
         string $jsonStringValue,
         string $uriFragmentIdentifierStringValue,
@@ -99,9 +106,10 @@ final class JsonPointerTest extends Framework\TestCase
     }
 
     /**
+     * @dataProvider provideJsonStringValueUriFragmentIdentifierStringValueAndReferenceTokens
+     *
      * @param array<int, ReferenceToken> $referenceTokens
      */
-    #[Framework\Attributes\DataProvider('provideJsonStringValueUriFragmentIdentifierStringValueAndReferenceTokens')]
     public function testFromReferenceTokensReturnsJsonPointer(
         string $jsonStringValue,
         string $uriFragmentIdentifierStringValue,
@@ -119,7 +127,7 @@ final class JsonPointerTest extends Framework\TestCase
      *
      * @return \Generator<string, array{0: string, 1: string, 2: array<int, ReferenceToken>}>
      */
-    public static function provideJsonStringValueUriFragmentIdentifierStringValueAndReferenceTokens(): \Generator
+    public static function provideJsonStringValueUriFragmentIdentifierStringValueAndReferenceTokens(): iterable
     {
         $values = [
             'array-index-0' => [
@@ -322,7 +330,9 @@ final class JsonPointerTest extends Framework\TestCase
         }
     }
 
-    #[Framework\Attributes\DataProvider('provideInvalidUriFragmentIdentifierStringValue')]
+    /**
+     * @dataProvider provideInvalidUriFragmentIdentifierStringValue
+     */
     public function testFromUriFragmentIdentifierStringRejectsInvalidValue(string $value): void
     {
         $this->expectException(Exception\InvalidJsonPointer::class);
@@ -335,7 +345,7 @@ final class JsonPointerTest extends Framework\TestCase
      *
      * @return \Generator<string, array{0: string}>
      */
-    public static function provideInvalidUriFragmentIdentifierStringValue(): \Generator
+    public static function provideInvalidUriFragmentIdentifierStringValue(): iterable
     {
         $values = [
             'does-not-start-with-hash' => 'foo',
@@ -373,7 +383,9 @@ final class JsonPointerTest extends Framework\TestCase
         self::assertSame('#', $jsonPointer->toUriFragmentIdentifierString());
     }
 
-    #[Framework\Attributes\DataProvider('provideJsonPointerReferenceTokenAndExpectedJsonPointer')]
+    /**
+     * @dataProvider provideJsonPointerReferenceTokenAndExpectedJsonPointer
+     */
     public function testAppendReturnsJsonPointer(
         JsonPointer $jsonPointer,
         ReferenceToken $referenceToken,
@@ -388,7 +400,7 @@ final class JsonPointerTest extends Framework\TestCase
     /**
      * @return \Generator<string, array{0: JsonPointer, 1: ReferenceToken, 2: JsonPointer}>
      */
-    public static function provideJsonPointerReferenceTokenAndExpectedJsonPointer(): \Generator
+    public static function provideJsonPointerReferenceTokenAndExpectedJsonPointer(): iterable
     {
         $values = [
             'document-and-reference-token-from-unescaped-string' => [

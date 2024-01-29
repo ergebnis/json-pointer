@@ -16,7 +16,9 @@ namespace Ergebnis\Json\Pointer\Test\Unit;
 use Ergebnis\Json\Pointer\Pattern;
 use PHPUnit\Framework;
 
-#[Framework\Attributes\CoversClass(Pattern::class)]
+/**
+ * @covers \Ergebnis\Json\Pointer\Pattern
+ */
 final class PatternTest extends Framework\TestCase
 {
     /**

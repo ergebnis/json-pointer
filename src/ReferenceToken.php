@@ -20,7 +20,7 @@ namespace Ergebnis\Json\Pointer;
  */
 final class ReferenceToken
 {
-    private function __construct(private readonly string $value)
+    private function __construct(private string $value)
     {
     }
 

@@ -79,7 +79,7 @@ final class JsonPointerTest extends Framework\TestCase
     public function testFromJsonStringReturnsJsonPointer(
         string $jsonStringValue,
         string $uriFragmentIdentifierStringValue,
-        array $referenceTokens,
+        array $referenceTokens
     ): void {
         $jsonPointer = JsonPointer::fromJsonString($jsonStringValue);
 
@@ -96,7 +96,7 @@ final class JsonPointerTest extends Framework\TestCase
     public function testFromUriFragmentIdentifierStringReturnsJsonPointer(
         string $jsonStringValue,
         string $uriFragmentIdentifierStringValue,
-        array $referenceTokens,
+        array $referenceTokens
     ): void {
         $jsonPointer = JsonPointer::fromUriFragmentIdentifierString($uriFragmentIdentifierStringValue);
 
@@ -113,7 +113,7 @@ final class JsonPointerTest extends Framework\TestCase
     public function testFromReferenceTokensReturnsJsonPointer(
         string $jsonStringValue,
         string $uriFragmentIdentifierStringValue,
-        array $referenceTokens,
+        array $referenceTokens
     ): void {
         $jsonPointer = JsonPointer::fromReferenceTokens(...$referenceTokens);
 
@@ -389,7 +389,7 @@ final class JsonPointerTest extends Framework\TestCase
     public function testAppendReturnsJsonPointer(
         JsonPointer $jsonPointer,
         ReferenceToken $referenceToken,
-        JsonPointer $expectedJsonPointer,
+        JsonPointer $expectedJsonPointer
     ): void {
         $mutated = $jsonPointer->append($referenceToken);
 

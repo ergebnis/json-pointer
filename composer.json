@@ -25,6 +25,7 @@
     "php": "~7.4.0 || ~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0"
   },
   "require-dev": {
+    "ergebnis/composer-normalize": "^2.43.0",
     "ergebnis/data-provider": "^3.2.0",
     "ergebnis/license": "^2.4.0",
     "ergebnis/php-cs-fixer-config": "^6.32.0",
@@ -49,6 +50,7 @@
   "config": {
     "allow-plugins": {
       "composer/package-versions-deprecated": true,
+      "ergebnis/composer-normalize": true,
       "infection/extension-installer": true
     },
     "audit": {
@@ -61,6 +63,9 @@
     "sort-packages": true
   },
   "extra": {
+    "branch-alias": {
+      "dev-main": "3.4-dev"
+    },
     "composer-normalize": {
       "indent-size": 2,
       "indent-style": "space"

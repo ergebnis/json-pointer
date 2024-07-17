@@ -8,9 +8,6 @@ on: # yamllint disable-line rule:truthy
     branches:
       - "main"
 
-env:
-  COMPOSER_ROOT_VERSION: "3.4-dev"
-
 jobs:
   code-coverage:
     name: "Code Coverage"
@@ -46,6 +43,9 @@ jobs:
 
       - name: "Validate composer.json and composer.lock"
         run: "composer validate --ansi --strict"
+
+      - name: "Determine composer root version"
+        uses: "ergebnis/.github/actions/composer/determine-root-version@1.9.2"
 
       - name: "Determine composer cache directory"
         uses: "ergebnis/.github/actions/composer/determine-cache-directory@1.9.2"
@@ -112,6 +112,9 @@ jobs:
 
       - name: "Validate composer.json and composer.lock"
         run: "composer validate --ansi --strict"
+
+      - name: "Determine composer root version"
+        uses: "ergebnis/.github/actions/composer/determine-root-version@1.9.2"
 
       - name: "Determine composer cache directory"
         uses: "ergebnis/.github/actions/composer/determine-cache-directory@1.9.2"
@@ -181,6 +184,9 @@ jobs:
       - name: "Validate composer.json and composer.lock"
         run: "composer validate --ansi --strict"
 
+      - name: "Determine composer root version"
+        uses: "ergebnis/.github/actions/composer/determine-root-version@1.9.2"
+
       - name: "Determine composer cache directory"
         uses: "ergebnis/.github/actions/composer/determine-cache-directory@1.9.2"
 
@@ -236,6 +242,9 @@ jobs:
       - name: "Validate composer.json and composer.lock"
         run: "composer validate --ansi --strict"
 
+      - name: "Determine composer root version"
+        uses: "ergebnis/.github/actions/composer/determine-root-version@1.9.2"
+
       - name: "Determine composer cache directory"
         uses: "ergebnis/.github/actions/composer/determine-cache-directory@1.9.2"
 
@@ -287,6 +296,9 @@ jobs:
 
       - name: "Validate composer.json and composer.lock"
         run: "composer validate --ansi --strict"
+
+      - name: "Determine composer root version"
+        uses: "ergebnis/.github/actions/composer/determine-root-version@1.9.2"
 
       - name: "Determine composer cache directory"
         uses: "ergebnis/.github/actions/composer/determine-cache-directory@1.9.2"
@@ -347,6 +359,9 @@ jobs:
       - name: "Validate composer.json and composer.lock"
         run: "composer validate --ansi --strict"
 
+      - name: "Determine composer root version"
+        uses: "ergebnis/.github/actions/composer/determine-root-version@1.9.2"
+
       - name: "Determine composer cache directory"
         uses: "ergebnis/.github/actions/composer/determine-cache-directory@1.9.2"
 
@@ -396,6 +411,9 @@ jobs:
 
       - name: "Validate composer.json and composer.lock"
         run: "composer validate --ansi --strict"
+
+      - name: "Determine composer root version"
+        uses: "ergebnis/.github/actions/composer/determine-root-version@1.9.2"
 
       - name: "Determine composer cache directory"
         uses: "ergebnis/.github/actions/composer/determine-cache-directory@1.9.2"
@@ -456,6 +474,9 @@ jobs:
 
       - name: "Validate composer.json and composer.lock"
         run: "composer validate --ansi --strict"
+
+      - name: "Determine composer root version"
+        uses: "ergebnis/.github/actions/composer/determine-root-version@1.9.2"
 
       - name: "Determine composer cache directory"
         uses: "ergebnis/.github/actions/composer/determine-cache-directory@1.9.2"

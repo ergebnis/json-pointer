@@ -6,7 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
-For a full diff see [`3.5.0...main`][3.5.0...main].
+For a full diff see [`3.6.0...main`][3.6.0...main].
+
+## [`3.6.0`][3.6.0]
+
+For a full diff see [`3.5.0...3.6.0`][3.5.0...3.6.0].
 
 ### Added
 
@@ -120,6 +124,7 @@ For a full diff see [`a5ba52c...1.0.0`][a5ba52c...1.0.0].
 [3.3.0]: https://github.com/ergebnis/json-pointer/releases/tag/3.3.0
 [3.4.0]: https://github.com/ergebnis/json-pointer/releases/tag/3.4.0
 [3.5.0]: https://github.com/ergebnis/json-pointer/releases/tag/3.5.0
+[3.6.0]: https://github.com/ergebnis/json-pointer/releases/tag/3.6.0
 
 [a5ba52c...1.0.0]: https://github.com/ergebnis/json-pointer/compare/a5ba52c...1.0.0
 [1.0.0...main]: https://github.com/ergebnis/json-pointer/compare/1.0.0...main
@@ -130,7 +135,8 @@ For a full diff see [`a5ba52c...1.0.0`][a5ba52c...1.0.0].
 [3.2.0...3.3.0]: https://github.com/ergebnis/json-pointer/compare/3.2.0...3.3.0
 [3.3.0...3.4.0]: https://github.com/ergebnis/json-pointer/compare/3.3.0...3.4.0
 [3.4.0...3.5.0]: https://github.com/ergebnis/json-pointer/compare/3.4.0...3.5.0
-[3.5.0...main]: https://github.com/ergebnis/json-pointer/compare/3.5.0...main
+[3.5.0...3.6.0]: https://github.com/ergebnis/json-pointer/compare/3.5.0...3.6.0
+[3.6.0...main]: https://github.com/ergebnis/json-pointer/compare/3.6.0...main
 
 [#1]: https://github.com/ergebnis/json-pointer/pull/1
 [#2]: https://github.com/ergebnis/json-pointer/pull/2

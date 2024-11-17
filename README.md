@@ -6,7 +6,6 @@
 [![Renew](https://github.com/ergebnis/json-pointer/workflows/Renew/badge.svg)](https://github.com/ergebnis/json-pointer/actions)
 
 [![Code Coverage](https://codecov.io/gh/ergebnis/json-pointer/branch/main/graph/badge.svg)](https://codecov.io/gh/ergebnis/json-pointer)
-[![Type Coverage](https://shepherd.dev/github/ergebnis/json-pointer/coverage.svg)](https://shepherd.dev/github/ergebnis/json-pointer)
 
 [![Latest Stable Version](https://poser.pugx.org/ergebnis/json-pointer/v/stable)](https://packagist.org/packages/ergebnis/json-pointer)
 [![Total Downloads](https://poser.pugx.org/ergebnis/json-pointer/downloads)](https://packagist.org/packages/ergebnis/json-pointer)

@@ -105,7 +105,6 @@ jobs:
           coverage: "none"
           extensions: "none, ctype, curl, dom, json, mbstring, phar, simplexml, tokenizer, xml, xmlwriter"
           php-version: "${{ matrix.php-version }}"
-          tools: "phive"
 
       - name: "Set up problem matchers for PHP"
         run: "echo \"::add-matcher::${{ runner.tool_cache }}/php.json\""
@@ -130,11 +129,6 @@ jobs:
         uses: "ergebnis/.github/actions/composer/install@1.9.2"
         with:
           dependencies: "${{ matrix.dependencies }}"
-
-      - name: "Install dependencies with phive"
-        uses: "ergebnis/.github/actions/phive/install@1.9.2"
-        with:
-          trust-gpg-keys: "0x033E5F8D801A2F8D"
 
       - name: "Run ergebnis/composer-normalize"
         run: "composer normalize --ansi --dry-run"
@@ -430,8 +424,8 @@ jobs:
         with:
           dependencies: "${{ matrix.dependencies }}"
 
-      - name: "Run vimeo/psalm"
-        run: "vendor/bin/psalm --config=psalm.xml --output-format=github --shepherd --show-info=false --stats --threads=4"
+      - name: "Run phpstan/phpstan"
+        run: "vendor/bin/phpstan --ansi --configuration=phpstan.neon --memory-limit=-1"
 
   tests:
     name: "Tests"

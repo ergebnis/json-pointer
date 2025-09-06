@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 For a full diff see [`3.7.0...main`][3.7.0...main].
 
+### Fixed
+
+- Updated branch alias ([#456]), by [@localheinz]
+
 ## [`3.7.0`][3.7.0]
 
 For a full diff see [`3.6.0...3.7.0`][3.6.0...3.7.0].
@@ -169,5 +173,6 @@ For a full diff see [`a5ba52c...1.0.0`][a5ba52c...1.0.0].
 [#419]: https://github.com/ergebnis/json-pointer/pull/419
 [#428]: https://github.com/ergebnis/json-pointer/pull/428
 [#452]: https://github.com/ergebnis/json-pointer/pull/452
+[#456]: https://github.com/ergebnis/json-pointer/pull/456
 
 [@localheinz]: https://github.com/localheinz

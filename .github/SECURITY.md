@@ -4,13 +4,13 @@
 
 The following versions of `ergebnis/json-pointer` have active support:
 
-- `^3.7.0`
+- `^3.7.1`
 
 ## Unsupported Versions
 
 The following versions of `ergebnis/json-pointer` have reached their end of life:
 
-- `<3.7.0`
+- `<3.7.1`
 
 ## Reporting a Vulnerability
 

@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 For a full diff see [`3.7.1...main`][3.7.1...main].
 
+### Added
+
+- Added support for PHP 8.5 ([#452]), by [@localheinz]
+
 ## [`3.7.1`][3.7.1]
 
 For a full diff see [`3.7.0...3.7.1`][3.7.0...3.7.1].

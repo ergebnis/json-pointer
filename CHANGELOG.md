@@ -16,6 +16,10 @@ For a full diff see [`3.7.0...3.7.1`][3.7.0...3.7.1].
 
 - Updated branch alias ([#456]), by [@localheinz]
 
+### Added
+
+- Added support for PHP 8.5 ([#452]), by [@localheinz]
+
 ## [`3.7.0`][3.7.0]
 
 For a full diff see [`3.6.0...3.7.0`][3.6.0...3.7.0].

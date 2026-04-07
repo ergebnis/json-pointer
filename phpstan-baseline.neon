@@ -1,3 +1,8 @@
 parameters:
-	ignoreErrors: []
+	ignoreErrors:
+		-
+			message: '#^Method Ergebnis\\Json\\Pointer\\Specification\:\:isSatisfiedBy\(\) should return bool but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Specification.php
 

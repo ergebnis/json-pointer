@@ -176,6 +176,7 @@ For a full diff see [`a5ba52c...1.0.0`][a5ba52c...1.0.0].
 [#9]: https://github.com/ergebnis/json-pointer/pull/9
 [#17]: https://github.com/ergebnis/json-pointer/pull/17
 [#48]: https://github.com/ergebnis/json-pointer/pull/48
+[#50]: https://github.com/ergebnis/json-pointer/pull/50
 [#53]: https://github.com/ergebnis/json-pointer/pull/53
 [#56]: https://github.com/ergebnis/json-pointer/pull/56
 [#57]: https://github.com/ergebnis/json-pointer/pull/57

@@ -9,7 +9,7 @@
 
 [![Latest Stable Version](https://poser.pugx.org/ergebnis/json-pointer/v/stable)](https://packagist.org/packages/ergebnis/json-pointer)
 [![Total Downloads](https://poser.pugx.org/ergebnis/json-pointer/downloads)](https://packagist.org/packages/ergebnis/json-pointer)
-[![Monthly Downloads](http://poser.pugx.org/ergebnis/json-pointer/d/monthly)](https://packagist.org/packages/ergebnis/json-pointer)
+[![Monthly Downloads](https://poser.pugx.org/ergebnis/json-pointer/d/monthly)](https://packagist.org/packages/ergebnis/json-pointer)
 
 This project provides a [`composer`](https://getcomposer.org) package with an abstraction of a [JSON pointer](https://datatracker.ietf.org/doc/html/rfc6901).
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "63eea0853a3bd6af209a1c7357cdeaf4",
+    "content-hash": "2add4b896dec5c50908a7d2d630b473f",
     "packages": [],
     "packages-dev": [
         {
@@ -1984,11 +1984,11 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.46",
+            "version": "2.2.14",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/a193923fc2d6325ef4e741cf3af8c3e8f54dbf25",
-                "reference": "a193923fc2d6325ef4e741cf3af8c3e8f54dbf25",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/9c672e7a8e791dfc3d30e55f683e73fc0b63a3ac",
+                "reference": "9c672e7a8e791dfc3d30e55f683e73fc0b63a3ac",
                 "shasum": ""
             },
             "require": {
@@ -2010,6 +2010,17 @@
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ondřej Mirtes"
+                },
+                {
+                    "name": "Markus Staab"
+                },
+                {
+                    "name": "Vincent Langlet"
+                }
             ],
             "description": "PHPStan - PHP Static Analysis Tool",
             "keywords": [
@@ -2033,7 +2044,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-04-01T09:25:14+00:00"
+            "time": "2026-09-12T21:39:33+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",

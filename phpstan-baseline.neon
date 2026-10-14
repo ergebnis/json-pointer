@@ -1,6 +1,12 @@
 parameters:
 	ignoreErrors:
 		-
+			message: '#^Property Ergebnis\\Json\\Pointer\\JsonPointer\:\:\$referenceTokens \(array\<int, Ergebnis\\Json\\Pointer\\ReferenceToken\>\) does not accept array\<int\<0, max\>\|string, Ergebnis\\Json\\Pointer\\ReferenceToken\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/JsonPointer.php
+
+		-
 			message: '#^Method Ergebnis\\Json\\Pointer\\Specification\:\:isSatisfiedBy\(\) should return bool but returns mixed\.$#'
 			identifier: return.type
 			count: 1

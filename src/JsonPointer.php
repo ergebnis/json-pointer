@@ -54,7 +54,17 @@ final class JsonPointer
         return new self(
             $value,
             ...\array_map(static function (string $jsonStringValue): ReferenceToken {
-                return ReferenceToken::fromJsonString($jsonStringValue);
+                return ReferenceToken::fromString(\str_replace(
+                    [
+                        '~1',
+                        '~0',
+                    ],
+                    [
+                        '/',
+                        '~',
+                    ],
+                    $jsonStringValue,
+                ));
             }, $jsonStringValues),
         );
     }
@@ -86,7 +96,17 @@ final class JsonPointer
         );
 
         $referenceTokens = \array_map(static function (string $uriFragmentIdentifierStringValue): ReferenceToken {
-            return ReferenceToken::fromUriFragmentIdentifierString($uriFragmentIdentifierStringValue);
+            return ReferenceToken::fromString(\str_replace(
+                [
+                    '~1',
+                    '~0',
+                ],
+                [
+                    '/',
+                    '~',
+                ],
+                \rawurldecode($uriFragmentIdentifierStringValue),
+            ));
         }, $uriFragmentIdentifierStringValues);
 
         return new self(

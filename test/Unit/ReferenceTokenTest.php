@@ -91,6 +91,7 @@ final class ReferenceTokenTest extends Framework\TestCase
     public static function provideInvalidUriFragmentIdentifierStringValue(): iterable
     {
         $values = [
+            'property-followed-by-new-line' => "foo\n",
             'property-with-caret' => 'foo^bar',
             'property-with-hash' => 'foo#bar',
             'property-with-pipe' => 'foo|bar',

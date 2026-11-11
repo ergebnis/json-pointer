@@ -45,6 +45,7 @@ final class JsonPointerTest extends Framework\TestCase
     {
         $values = [
             'does-not-start-with-forward-slash' => 'foo',
+            'is-new-line' => "\n",
             'property-with-tilde-followed-by-word' => '/foo~bar',
         ];
 
@@ -349,6 +350,8 @@ final class JsonPointerTest extends Framework\TestCase
     {
         $values = [
             'does-not-start-with-hash' => 'foo',
+            'hash-followed-by-new-line' => "#\n",
+            'property-followed-by-new-line' => "#/foo\n",
             'property-with-tilde-followed-by-word' => '#foo~bar',
         ];
 

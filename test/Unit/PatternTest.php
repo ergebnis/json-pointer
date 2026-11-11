@@ -28,7 +28,7 @@ final class PatternTest extends Framework\TestCase
     {
         $jsonStringReferenceToken = self::jsonStringReferenceToken();
 
-        $expected = "/^(?P<jsonStringJsonPointer>(\\/{$jsonStringReferenceToken})*)$/u";
+        $expected = "/^(?P<jsonStringJsonPointer>(\\/{$jsonStringReferenceToken})*)\\z/u";
 
         self::assertSame($expected, Pattern::JSON_STRING_JSON_POINTER);
     }
@@ -40,7 +40,7 @@ final class PatternTest extends Framework\TestCase
     {
         $jsonStringReferenceToken = self::jsonStringReferenceToken();
 
-        $expected = "/^{$jsonStringReferenceToken}$/u";
+        $expected = "/^{$jsonStringReferenceToken}\\z/u";
 
         self::assertSame($expected, Pattern::JSON_STRING_REFERENCE_TOKEN);
     }
@@ -55,7 +55,7 @@ final class PatternTest extends Framework\TestCase
     {
         $uriFragmentIdentifierReferenceToken = self::uriFragmentIdentifierReferenceToken();
 
-        $expected = "/^(?P<uriFragmentIdentifierJsonPointer>#(\\/{$uriFragmentIdentifierReferenceToken})*)$/u";
+        $expected = "/^(?P<uriFragmentIdentifierJsonPointer>#(\\/{$uriFragmentIdentifierReferenceToken})*)\\z/u";
 
         self::assertSame($expected, Pattern::URI_FRAGMENT_IDENTIFIER_JSON_POINTER);
     }
@@ -70,7 +70,7 @@ final class PatternTest extends Framework\TestCase
     {
         $uriFragmentIdentifierReferenceToken = self::uriFragmentIdentifierReferenceToken();
 
-        $expected = "/^{$uriFragmentIdentifierReferenceToken}$/u";
+        $expected = "/^{$uriFragmentIdentifierReferenceToken}\\z/u";
 
         self::assertSame($expected, Pattern::URI_FRAGMENT_IDENTIFIER_REFERENCE_TOKEN);
     }

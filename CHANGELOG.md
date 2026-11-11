@@ -13,6 +13,10 @@ For a full diff see [`3.9.0...main`][3.9.0...main].
 - Adjusted `JsonPointer` to compute its JSON string once ([#591]), by [@localheinz]
 - Adjusted `JsonPointer` to validate a JSON pointer only once ([#592]), by [@localheinz]
 
+### Fixed
+
+- Adjusted `JsonPointer` and `ReferenceToken` to reject a trailing new line ([#594]), by [@localheinz]
+
 ## [`3.9.0`][3.9.0]
 
 For a full diff see [`3.8.0...3.9.0`][3.8.0...3.9.0].
@@ -209,5 +213,6 @@ For a full diff see [`a5ba52c...1.0.0`][a5ba52c...1.0.0].
 [#527]: https://github.com/ergebnis/json-pointer/pull/527
 [#591]: https://github.com/ergebnis/json-pointer/pull/591
 [#592]: https://github.com/ergebnis/json-pointer/pull/592
+[#594]: https://github.com/ergebnis/json-pointer/pull/594
 
 [@localheinz]: https://github.com/localheinz

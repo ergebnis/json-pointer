@@ -24,9 +24,13 @@ final class JsonPointer
      * @var array<int, ReferenceToken>
      */
     private array $referenceTokens;
+    private string $jsonString;
 
-    private function __construct(ReferenceToken ...$referenceTokens)
-    {
+    private function __construct(
+        string $jsonString,
+        ReferenceToken ...$referenceTokens
+    ) {
+        $this->jsonString = $jsonString;
         $this->referenceTokens = $referenceTokens;
     }
 
@@ -47,14 +51,20 @@ final class JsonPointer
             1,
         );
 
-        return new self(...\array_map(static function (string $jsonStringValue): ReferenceToken {
-            return ReferenceToken::fromJsonString($jsonStringValue);
-        }, $jsonStringValues));
+        return new self(
+            $value,
+            ...\array_map(static function (string $jsonStringValue): ReferenceToken {
+                return ReferenceToken::fromJsonString($jsonStringValue);
+            }, $jsonStringValues),
+        );
     }
 
     public static function fromReferenceTokens(ReferenceToken ...$referenceTokens): self
     {
-        return new self(...$referenceTokens);
+        return new self(
+            self::jsonStringFromReferenceTokens(...$referenceTokens),
+            ...$referenceTokens,
+        );
     }
 
     /**
@@ -75,14 +85,19 @@ final class JsonPointer
             1,
         );
 
-        return new self(...\array_map(static function (string $uriFragmentIdentifierStringValue): ReferenceToken {
+        $referenceTokens = \array_map(static function (string $uriFragmentIdentifierStringValue): ReferenceToken {
             return ReferenceToken::fromUriFragmentIdentifierString($uriFragmentIdentifierStringValue);
-        }, $uriFragmentIdentifierStringValues));
+        }, $uriFragmentIdentifierStringValues);
+
+        return new self(
+            self::jsonStringFromReferenceTokens(...$referenceTokens),
+            ...$referenceTokens,
+        );
     }
 
     public static function document(): self
     {
-        return new self();
+        return new self('');
     }
 
     public function append(ReferenceToken $referenceToken): self
@@ -91,21 +106,19 @@ final class JsonPointer
 
         $referenceTokens[] = $referenceToken;
 
-        return new self(...$referenceTokens);
+        return new self(
+            \sprintf(
+                '%s/%s',
+                $this->jsonString,
+                $referenceToken->toJsonString(),
+            ),
+            ...$referenceTokens,
+        );
     }
 
     public function toJsonString(): string
     {
-        if ([] === $this->referenceTokens) {
-            return '';
-        }
-
-        return \sprintf(
-            '/%s',
-            \implode('/', \array_map(static function (ReferenceToken $referenceToken): string {
-                return $referenceToken->toJsonString();
-            }, $this->referenceTokens)),
-        );
+        return $this->jsonString;
     }
 
     public function toUriFragmentIdentifierString(): string
@@ -132,6 +145,20 @@ final class JsonPointer
 
     public function equals(self $other): bool
     {
-        return $this->toJsonString() === $other->toJsonString();
+        return $this->jsonString === $other->jsonString;
+    }
+
+    private static function jsonStringFromReferenceTokens(ReferenceToken ...$referenceTokens): string
+    {
+        if ([] === $referenceTokens) {
+            return '';
+        }
+
+        return \sprintf(
+            '/%s',
+            \implode('/', \array_map(static function (ReferenceToken $referenceToken): string {
+                return $referenceToken->toJsonString();
+            }, $referenceTokens)),
+        );
     }
 }

@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 For a full diff see [`3.9.0...main`][3.9.0...main].
 
+### Changed
+
+- Adjusted `JsonPointer` to compute its JSON string once ([#591]), by [@localheinz]
+
 ## [`3.9.0`][3.9.0]
 
 For a full diff see [`3.8.0...3.9.0`][3.8.0...3.9.0].
@@ -202,5 +206,6 @@ For a full diff see [`a5ba52c...1.0.0`][a5ba52c...1.0.0].
 [#452]: https://github.com/ergebnis/json-pointer/pull/452
 [#456]: https://github.com/ergebnis/json-pointer/pull/456
 [#527]: https://github.com/ergebnis/json-pointer/pull/527
+[#591]: https://github.com/ergebnis/json-pointer/pull/591
 
 [@localheinz]: https://github.com/localheinz

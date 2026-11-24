@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 For a full diff see [`3.11.0...main`][3.11.0...main].
 
+### Changed
+
+- Allowed installation on PHP 8.7 ([#604]), by [@localheinz]
+
 ## [`3.11.0`][3.11.0]
 
 For a full diff see [`3.10.0...3.11.0`][3.10.0...3.11.0].
@@ -231,5 +235,6 @@ For a full diff see [`a5ba52c...1.0.0`][a5ba52c...1.0.0].
 [#592]: https://github.com/ergebnis/json-pointer/pull/592
 [#594]: https://github.com/ergebnis/json-pointer/pull/594
 [#595]: https://github.com/ergebnis/json-pointer/pull/595
+[#604]: https://github.com/ergebnis/json-pointer/pull/604
 
 [@localheinz]: https://github.com/localheinz

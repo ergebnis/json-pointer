@@ -13,8 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Pointer\Test\Unit\Exception;
 
-use Ergebnis\Json\Pointer\Exception;
-use Ergebnis\Json\Pointer\Test;
+use Ergebnis\Json\Pointer;
 use PHPUnit\Framework;
 
 /**
@@ -22,13 +21,13 @@ use PHPUnit\Framework;
  */
 final class InvalidReferenceTokenTest extends Framework\TestCase
 {
-    use Test\Util\Helper;
+    use Pointer\Test\Util\Helper;
 
     public function testFromJsonStringReturnsInvalidReferenceToken(): void
     {
         $value = self::faker()->word();
 
-        $exception = Exception\InvalidReferenceToken::fromJsonString($value);
+        $exception = Pointer\Exception\InvalidReferenceToken::fromJsonString($value);
 
         $message = \sprintf(
             'Value "%s" does not appear to be a valid JSON Pointer reference token.',
@@ -42,7 +41,7 @@ final class InvalidReferenceTokenTest extends Framework\TestCase
     {
         $value = self::faker()->numberBetween();
 
-        $exception = Exception\InvalidReferenceToken::fromInt($value);
+        $exception = Pointer\Exception\InvalidReferenceToken::fromInt($value);
 
         $message = \sprintf(
             'Value "%d" does not appear to be a valid JSON Pointer array index.',

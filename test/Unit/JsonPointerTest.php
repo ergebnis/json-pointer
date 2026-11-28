@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Pointer\Test\Unit;
 
-use Ergebnis\Json\Pointer\Exception;
-use Ergebnis\Json\Pointer\JsonPointer;
-use Ergebnis\Json\Pointer\ReferenceToken;
+use Ergebnis\Json\Pointer;
 use PHPUnit\Framework;
 
 /**
@@ -31,9 +29,9 @@ final class JsonPointerTest extends Framework\TestCase
      */
     public function testFromJsonStringRejectsInvalidValue(string $value): void
     {
-        $this->expectException(Exception\InvalidJsonPointer::class);
+        $this->expectException(Pointer\Exception\InvalidJsonPointer::class);
 
-        JsonPointer::fromJsonString($value);
+        Pointer\JsonPointer::fromJsonString($value);
     }
 
     /**
@@ -75,14 +73,14 @@ final class JsonPointerTest extends Framework\TestCase
     /**
      * @dataProvider provideJsonStringValueUriFragmentIdentifierStringValueAndReferenceTokens
      *
-     * @param array<int, ReferenceToken> $referenceTokens
+     * @param array<int, Pointer\ReferenceToken> $referenceTokens
      */
     public function testFromJsonStringReturnsJsonPointer(
         string $jsonStringValue,
         string $uriFragmentIdentifierStringValue,
         array $referenceTokens
     ): void {
-        $jsonPointer = JsonPointer::fromJsonString($jsonStringValue);
+        $jsonPointer = Pointer\JsonPointer::fromJsonString($jsonStringValue);
 
         self::assertSame($jsonStringValue, $jsonPointer->toJsonString());
         self::assertSame($uriFragmentIdentifierStringValue, $jsonPointer->toUriFragmentIdentifierString());
@@ -92,14 +90,14 @@ final class JsonPointerTest extends Framework\TestCase
     /**
      * @dataProvider provideJsonStringValueUriFragmentIdentifierStringValueAndReferenceTokens
      *
-     * @param array<int, ReferenceToken> $referenceTokens
+     * @param array<int, Pointer\ReferenceToken> $referenceTokens
      */
     public function testFromUriFragmentIdentifierStringReturnsJsonPointer(
         string $jsonStringValue,
         string $uriFragmentIdentifierStringValue,
         array $referenceTokens
     ): void {
-        $jsonPointer = JsonPointer::fromUriFragmentIdentifierString($uriFragmentIdentifierStringValue);
+        $jsonPointer = Pointer\JsonPointer::fromUriFragmentIdentifierString($uriFragmentIdentifierStringValue);
 
         self::assertSame($jsonStringValue, $jsonPointer->toJsonString());
         self::assertSame($uriFragmentIdentifierStringValue, $jsonPointer->toUriFragmentIdentifierString());
@@ -109,14 +107,14 @@ final class JsonPointerTest extends Framework\TestCase
     /**
      * @dataProvider provideJsonStringValueUriFragmentIdentifierStringValueAndReferenceTokens
      *
-     * @param array<int, ReferenceToken> $referenceTokens
+     * @param array<int, Pointer\ReferenceToken> $referenceTokens
      */
     public function testFromReferenceTokensReturnsJsonPointer(
         string $jsonStringValue,
         string $uriFragmentIdentifierStringValue,
         array $referenceTokens
     ): void {
-        $jsonPointer = JsonPointer::fromReferenceTokens(...$referenceTokens);
+        $jsonPointer = Pointer\JsonPointer::fromReferenceTokens(...$referenceTokens);
 
         self::assertSame($jsonStringValue, $jsonPointer->toJsonString());
         self::assertSame($uriFragmentIdentifierStringValue, $jsonPointer->toUriFragmentIdentifierString());
@@ -126,7 +124,7 @@ final class JsonPointerTest extends Framework\TestCase
     /**
      * @see https://datatracker.ietf.org/doc/html/rfc6901#section-5
      *
-     * @return \Generator<string, array{0: string, 1: string, 2: array<int, ReferenceToken>}>
+     * @return \Generator<string, array{0: string, 1: string, 2: array<int, Pointer\ReferenceToken>}>
      */
     public static function provideJsonStringValueUriFragmentIdentifierStringValueAndReferenceTokens(): iterable
     {
@@ -135,21 +133,21 @@ final class JsonPointerTest extends Framework\TestCase
                 '/0',
                 '#/0',
                 [
-                    ReferenceToken::fromInt(0),
+                    Pointer\ReferenceToken::fromInt(0),
                 ],
             ],
             'array-index-1' => [
                 '/1',
                 '#/1',
                 [
-                    ReferenceToken::fromInt(1),
+                    Pointer\ReferenceToken::fromInt(1),
                 ],
             ],
             'array-index-9000' => [
                 '/9000',
                 '#/9000',
                 [
-                    ReferenceToken::fromInt(9000),
+                    Pointer\ReferenceToken::fromInt(9000),
                 ],
             ],
             'document' => [
@@ -161,163 +159,163 @@ final class JsonPointerTest extends Framework\TestCase
                 '/^',
                 '#/%5E',
                 [
-                    ReferenceToken::fromString('^'),
+                    Pointer\ReferenceToken::fromString('^'),
                 ],
             ],
             'property-empty' => [
                 '/',
                 '#/',
                 [
-                    ReferenceToken::fromString(''),
+                    Pointer\ReferenceToken::fromString(''),
                 ],
             ],
             'property-percent' => [
                 '/%',
                 '#/%25',
                 [
-                    ReferenceToken::fromString('%'),
+                    Pointer\ReferenceToken::fromString('%'),
                 ],
             ],
             'property-pipe' => [
                 '/|',
                 '#/%7C',
                 [
-                    ReferenceToken::fromString('|'),
+                    Pointer\ReferenceToken::fromString('|'),
                 ],
             ],
             'property-quote-double' => [
                 '/"',
                 '#/%22',
                 [
-                    ReferenceToken::fromString('"'),
+                    Pointer\ReferenceToken::fromString('"'),
                 ],
             ],
             'property-quote-single' => [
                 "/'",
                 '#/%27',
                 [
-                    ReferenceToken::fromString("'"),
+                    Pointer\ReferenceToken::fromString("'"),
                 ],
             ],
             'property-slash-backward' => [
                 '/\\',
                 '#/%5C',
                 [
-                    ReferenceToken::fromString('\\'),
+                    Pointer\ReferenceToken::fromString('\\'),
                 ],
             ],
             'property-slash-forward-escaped' => [
                 '/~1',
                 '#/~1',
                 [
-                    ReferenceToken::fromString('/'),
+                    Pointer\ReferenceToken::fromString('/'),
                 ],
             ],
             'property-space' => [
                 '/ ',
                 '#/%20',
                 [
-                    ReferenceToken::fromString(' '),
+                    Pointer\ReferenceToken::fromString(' '),
                 ],
             ],
             'property-tilde-escaped' => [
                 '/~0',
                 '#/~0',
                 [
-                    ReferenceToken::fromString('~'),
+                    Pointer\ReferenceToken::fromString('~'),
                 ],
             ],
             'property-unicode-character' => [
                 '/😆',
                 '#/%F0%9F%98%86',
                 [
-                    ReferenceToken::fromString('😆'),
+                    Pointer\ReferenceToken::fromString('😆'),
                 ],
             ],
             'property-with-array-index' => [
                 '/foo/0',
                 '#/foo/0',
                 [
-                    ReferenceToken::fromString('foo'),
-                    ReferenceToken::fromInt(0),
+                    Pointer\ReferenceToken::fromString('foo'),
+                    Pointer\ReferenceToken::fromInt(0),
                 ],
             ],
             'property-with-caret' => [
                 '/foo^bar',
                 '#/foo%5Ebar',
                 [
-                    ReferenceToken::fromString('foo^bar'),
+                    Pointer\ReferenceToken::fromString('foo^bar'),
                 ],
             ],
             'property-with-percent' => [
                 '/foo%bar',
                 '#/foo%25bar',
                 [
-                    ReferenceToken::fromString('foo%bar'),
+                    Pointer\ReferenceToken::fromString('foo%bar'),
                 ],
             ],
             'property-with-pipe' => [
                 '/foo|bar',
                 '#/foo%7Cbar',
                 [
-                    ReferenceToken::fromString('foo|bar'),
+                    Pointer\ReferenceToken::fromString('foo|bar'),
                 ],
             ],
             'property-with-quote-double' => [
                 '/foo"bar',
                 '#/foo%22bar',
                 [
-                    ReferenceToken::fromString('foo"bar'),
+                    Pointer\ReferenceToken::fromString('foo"bar'),
                 ],
             ],
             'property-with-quote-single' => [
                 "/foo'bar",
                 '#/foo%27bar',
                 [
-                    ReferenceToken::fromString("foo'bar"),
+                    Pointer\ReferenceToken::fromString("foo'bar"),
                 ],
             ],
             'property-with-slash-backward' => [
                 '/foo\\bar',
                 '#/foo%5Cbar',
                 [
-                    ReferenceToken::fromString('foo\\bar'),
+                    Pointer\ReferenceToken::fromString('foo\\bar'),
                 ],
             ],
             'property-with-slash-forward-escaped' => [
                 '/foo~1bar',
                 '#/foo~1bar',
                 [
-                    ReferenceToken::fromString('foo/bar'),
+                    Pointer\ReferenceToken::fromString('foo/bar'),
                 ],
             ],
             'property-with-tilde-escaped' => [
                 '/foo~0bar',
                 '#/foo~0bar',
                 [
-                    ReferenceToken::fromString('foo~bar'),
+                    Pointer\ReferenceToken::fromString('foo~bar'),
                 ],
             ],
             'property-with-unicode-character' => [
                 '/foo😆bar',
                 '#/foo%F0%9F%98%86bar',
                 [
-                    ReferenceToken::fromString('foo😆bar'),
+                    Pointer\ReferenceToken::fromString('foo😆bar'),
                 ],
             ],
             'property-with-word' => [
                 '/foo/bar',
                 '#/foo/bar',
                 [
-                    ReferenceToken::fromString('foo'),
-                    ReferenceToken::fromString('bar'),
+                    Pointer\ReferenceToken::fromString('foo'),
+                    Pointer\ReferenceToken::fromString('bar'),
                 ],
             ],
             'property-word' => [
                 '/foo',
                 '#/foo',
                 [
-                    ReferenceToken::fromString('foo'),
+                    Pointer\ReferenceToken::fromString('foo'),
                 ],
             ],
         ];
@@ -336,9 +334,9 @@ final class JsonPointerTest extends Framework\TestCase
      */
     public function testFromUriFragmentIdentifierStringRejectsInvalidValue(string $value): void
     {
-        $this->expectException(Exception\InvalidJsonPointer::class);
+        $this->expectException(Pointer\Exception\InvalidJsonPointer::class);
 
-        JsonPointer::fromUriFragmentIdentifierString($value);
+        Pointer\JsonPointer::fromUriFragmentIdentifierString($value);
     }
 
     /**
@@ -380,7 +378,7 @@ final class JsonPointerTest extends Framework\TestCase
 
     public function testDocumentReturnsJsonPointer(): void
     {
-        $jsonPointer = JsonPointer::document();
+        $jsonPointer = Pointer\JsonPointer::document();
 
         self::assertSame('', $jsonPointer->toJsonString());
         self::assertSame('#', $jsonPointer->toUriFragmentIdentifierString());
@@ -390,9 +388,9 @@ final class JsonPointerTest extends Framework\TestCase
      * @dataProvider provideJsonPointerReferenceTokenAndExpectedJsonPointer
      */
     public function testAppendReturnsJsonPointer(
-        JsonPointer $jsonPointer,
-        ReferenceToken $referenceToken,
-        JsonPointer $expectedJsonPointer
+        Pointer\JsonPointer $jsonPointer,
+        Pointer\ReferenceToken $referenceToken,
+        Pointer\JsonPointer $expectedJsonPointer
     ): void {
         $mutated = $jsonPointer->append($referenceToken);
 
@@ -401,35 +399,35 @@ final class JsonPointerTest extends Framework\TestCase
     }
 
     /**
-     * @return \Generator<string, array{0: JsonPointer, 1: ReferenceToken, 2: JsonPointer}>
+     * @return \Generator<string, array{0: Pointer\JsonPointer, 1: Pointer\ReferenceToken, 2: Pointer\JsonPointer}>
      */
     public static function provideJsonPointerReferenceTokenAndExpectedJsonPointer(): iterable
     {
         $values = [
             'document-and-reference-token-from-unescaped-string' => [
-                JsonPointer::document(),
-                ReferenceToken::fromString('foo'),
-                JsonPointer::fromJsonString('/foo'),
+                Pointer\JsonPointer::document(),
+                Pointer\ReferenceToken::fromString('foo'),
+                Pointer\JsonPointer::fromJsonString('/foo'),
             ],
             'document-from-string-and-reference-token-from-unescaped-string' => [
-                JsonPointer::fromJsonString(''),
-                ReferenceToken::fromString('foo'),
-                JsonPointer::fromJsonString('/foo'),
+                Pointer\JsonPointer::fromJsonString(''),
+                Pointer\ReferenceToken::fromString('foo'),
+                Pointer\JsonPointer::fromJsonString('/foo'),
             ],
             'pointer-and-reference-token-from-int' => [
-                JsonPointer::fromJsonString('/foo'),
-                ReferenceToken::fromInt(9000),
-                JsonPointer::fromJsonString('/foo/9000'),
+                Pointer\JsonPointer::fromJsonString('/foo'),
+                Pointer\ReferenceToken::fromInt(9000),
+                Pointer\JsonPointer::fromJsonString('/foo/9000'),
             ],
             'pointer-and-reference-token-from-unescaped-string' => [
-                JsonPointer::fromJsonString('/foo'),
-                ReferenceToken::fromString('bar/baz'),
-                JsonPointer::fromJsonString('/foo/bar~1baz'),
+                Pointer\JsonPointer::fromJsonString('/foo'),
+                Pointer\ReferenceToken::fromString('bar/baz'),
+                Pointer\JsonPointer::fromJsonString('/foo/bar~1baz'),
             ],
             'pointer-and-reference-token-from-escaped-string' => [
-                JsonPointer::fromJsonString('/foo'),
-                ReferenceToken::fromJsonString('bar~1baz'),
-                JsonPointer::fromJsonString('/foo/bar~1baz'),
+                Pointer\JsonPointer::fromJsonString('/foo'),
+                Pointer\ReferenceToken::fromJsonString('bar~1baz'),
+                Pointer\JsonPointer::fromJsonString('/foo/bar~1baz'),
             ],
         ];
 
@@ -444,8 +442,8 @@ final class JsonPointerTest extends Framework\TestCase
 
     public function testEqualsReturnsFalseWhenValueIsDifferent(): void
     {
-        $one = JsonPointer::fromJsonString('/foo/bar/0/baz~0');
-        $two = JsonPointer::fromJsonString('/foo/bar/1');
+        $one = Pointer\JsonPointer::fromJsonString('/foo/bar/0/baz~0');
+        $two = Pointer\JsonPointer::fromJsonString('/foo/bar/1');
 
         self::assertFalse($one->equals($two));
     }
@@ -454,8 +452,8 @@ final class JsonPointerTest extends Framework\TestCase
     {
         $value = '/foo/bar/0/baz~0';
 
-        $one = JsonPointer::fromJsonString($value);
-        $two = JsonPointer::fromJsonString($value);
+        $one = Pointer\JsonPointer::fromJsonString($value);
+        $two = Pointer\JsonPointer::fromJsonString($value);
 
         self::assertTrue($one->equals($two));
     }

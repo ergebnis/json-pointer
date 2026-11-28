@@ -13,8 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Pointer\Test\Unit\Exception;
 
-use Ergebnis\Json\Pointer\Exception;
-use Ergebnis\Json\Pointer\Test;
+use Ergebnis\Json\Pointer;
 use PHPUnit\Framework;
 
 /**
@@ -22,13 +21,13 @@ use PHPUnit\Framework;
  */
 final class InvalidJsonPointerTest extends Framework\TestCase
 {
-    use Test\Util\Helper;
+    use Pointer\Test\Util\Helper;
 
     public function testFromJsonStringReturnsInvalidJsonPointerException(): void
     {
         $value = self::faker()->sentence();
 
-        $exception = Exception\InvalidJsonPointer::fromJsonString($value);
+        $exception = Pointer\Exception\InvalidJsonPointer::fromJsonString($value);
 
         $message = \sprintf(
             'Value "%s" does not appear to be a valid JSON string representation of a JSON Pointer.',
@@ -42,7 +41,7 @@ final class InvalidJsonPointerTest extends Framework\TestCase
     {
         $value = self::faker()->sentence();
 
-        $exception = Exception\InvalidJsonPointer::fromUriFragmentIdentifierString($value);
+        $exception = Pointer\Exception\InvalidJsonPointer::fromUriFragmentIdentifierString($value);
 
         $message = \sprintf(
             'Value "%s" does not appear to be a valid URI fragment identifier representation of a JSON Pointer.',

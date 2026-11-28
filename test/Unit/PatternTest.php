@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Pointer\Test\Unit;
 
-use Ergebnis\Json\Pointer\Pattern;
+use Ergebnis\Json\Pointer;
 use PHPUnit\Framework;
 
 /**
@@ -30,7 +30,7 @@ final class PatternTest extends Framework\TestCase
 
         $expected = "/^(?P<jsonStringJsonPointer>(\\/{$jsonStringReferenceToken})*)\\z/u";
 
-        self::assertSame($expected, Pattern::JSON_STRING_JSON_POINTER);
+        self::assertSame(Pointer\Pattern::JSON_STRING_JSON_POINTER, $expected);
     }
 
     /**
@@ -42,7 +42,7 @@ final class PatternTest extends Framework\TestCase
 
         $expected = "/^{$jsonStringReferenceToken}\\z/u";
 
-        self::assertSame($expected, Pattern::JSON_STRING_REFERENCE_TOKEN);
+        self::assertSame(Pointer\Pattern::JSON_STRING_REFERENCE_TOKEN, $expected);
     }
 
     /**
@@ -57,7 +57,7 @@ final class PatternTest extends Framework\TestCase
 
         $expected = "/^(?P<uriFragmentIdentifierJsonPointer>#(\\/{$uriFragmentIdentifierReferenceToken})*)\\z/u";
 
-        self::assertSame($expected, Pattern::URI_FRAGMENT_IDENTIFIER_JSON_POINTER);
+        self::assertSame(Pointer\Pattern::URI_FRAGMENT_IDENTIFIER_JSON_POINTER, $expected);
     }
 
     /**
@@ -72,7 +72,7 @@ final class PatternTest extends Framework\TestCase
 
         $expected = "/^{$uriFragmentIdentifierReferenceToken}\\z/u";
 
-        self::assertSame($expected, Pattern::URI_FRAGMENT_IDENTIFIER_REFERENCE_TOKEN);
+        self::assertSame(Pointer\Pattern::URI_FRAGMENT_IDENTIFIER_REFERENCE_TOKEN, $expected);
     }
 
     /**

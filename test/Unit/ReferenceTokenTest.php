@@ -14,9 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Pointer\Test\Unit;
 
 use Ergebnis\DataProvider;
-use Ergebnis\Json\Pointer\Exception;
-use Ergebnis\Json\Pointer\ReferenceToken;
-use Ergebnis\Json\Pointer\Test;
+use Ergebnis\Json\Pointer;
 use PHPUnit\Framework;
 
 /**
@@ -26,16 +24,16 @@ use PHPUnit\Framework;
  */
 final class ReferenceTokenTest extends Framework\TestCase
 {
-    use Test\Util\Helper;
+    use Pointer\Test\Util\Helper;
 
     /**
      * @dataProvider provideInvalidJsonStringValue
      */
     public function testFromJsonStringRejectsInvalidValue(string $value): void
     {
-        $this->expectException(Exception\InvalidReferenceToken::class);
+        $this->expectException(Pointer\Exception\InvalidReferenceToken::class);
 
-        ReferenceToken::fromJsonString($value);
+        Pointer\ReferenceToken::fromJsonString($value);
     }
 
     /**
@@ -78,9 +76,9 @@ final class ReferenceTokenTest extends Framework\TestCase
      */
     public function testFromUriFragmentIdentifierStringRejectsInvalidValue(string $value): void
     {
-        $this->expectException(Exception\InvalidReferenceToken::class);
+        $this->expectException(Pointer\Exception\InvalidReferenceToken::class);
 
-        ReferenceToken::fromUriFragmentIdentifierString($value);
+        Pointer\ReferenceToken::fromUriFragmentIdentifierString($value);
     }
 
     /**
@@ -117,7 +115,7 @@ final class ReferenceTokenTest extends Framework\TestCase
         string $jsonStringValue,
         string $uriFragmentIdentifierStringValue
     ): void {
-        $referenceToken = ReferenceToken::fromJsonString($jsonStringValue);
+        $referenceToken = Pointer\ReferenceToken::fromJsonString($jsonStringValue);
 
         self::assertSame($jsonStringValue, $referenceToken->toJsonString());
         self::assertSame($value, $referenceToken->toString());
@@ -132,7 +130,7 @@ final class ReferenceTokenTest extends Framework\TestCase
         string $jsonStringValue,
         string $uriFragmentIdentifierStringValue
     ): void {
-        $referenceToken = ReferenceToken::fromString($value);
+        $referenceToken = Pointer\ReferenceToken::fromString($value);
 
         self::assertSame($jsonStringValue, $referenceToken->toJsonString());
         self::assertSame($value, $referenceToken->toString());
@@ -147,7 +145,7 @@ final class ReferenceTokenTest extends Framework\TestCase
         string $jsonStringValue,
         string $uriFragmentIdentifierStringValue
     ): void {
-        $referenceToken = ReferenceToken::fromUriFragmentIdentifierString($uriFragmentIdentifierStringValue);
+        $referenceToken = Pointer\ReferenceToken::fromUriFragmentIdentifierString($uriFragmentIdentifierStringValue);
 
         self::assertSame($jsonStringValue, $referenceToken->toJsonString());
         self::assertSame($value, $referenceToken->toString());
@@ -304,9 +302,9 @@ final class ReferenceTokenTest extends Framework\TestCase
      */
     public function testFromIntRejectsInvalidValue(int $value): void
     {
-        $this->expectException(Exception\InvalidReferenceToken::class);
+        $this->expectException(Pointer\Exception\InvalidReferenceToken::class);
 
-        ReferenceToken::fromInt($value);
+        Pointer\ReferenceToken::fromInt($value);
     }
 
     /**
@@ -315,7 +313,7 @@ final class ReferenceTokenTest extends Framework\TestCase
      */
     public function testFromIntReturnsReferenceToken(int $value): void
     {
-        $referenceToken = ReferenceToken::fromInt($value);
+        $referenceToken = Pointer\ReferenceToken::fromInt($value);
 
         self::assertSame((string) $value, $referenceToken->toJsonString());
         self::assertSame((string) $value, $referenceToken->toString());
@@ -325,8 +323,8 @@ final class ReferenceTokenTest extends Framework\TestCase
     {
         $faker = self::faker();
 
-        $one = ReferenceToken::fromString($faker->sentence());
-        $two = ReferenceToken::fromString($faker->sentence());
+        $one = Pointer\ReferenceToken::fromString($faker->sentence());
+        $two = Pointer\ReferenceToken::fromString($faker->sentence());
 
         self::assertFalse($one->equals($two));
     }
@@ -335,8 +333,8 @@ final class ReferenceTokenTest extends Framework\TestCase
     {
         $value = self::faker()->sentence();
 
-        $one = ReferenceToken::fromString($value);
-        $two = ReferenceToken::fromString($value);
+        $one = Pointer\ReferenceToken::fromString($value);
+        $two = Pointer\ReferenceToken::fromString($value);
 
         self::assertTrue($one->equals($two));
     }

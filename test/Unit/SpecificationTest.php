@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Pointer\Test\Unit;
 
-use Ergebnis\Json\Pointer\JsonPointer;
-use Ergebnis\Json\Pointer\Specification;
-use Ergebnis\Json\Pointer\Test;
+use Ergebnis\Json\Pointer;
 use PHPUnit\Framework;
 
 /**
@@ -26,34 +24,34 @@ use PHPUnit\Framework;
  */
 final class SpecificationTest extends Framework\TestCase
 {
-    use Test\Util\Helper;
+    use Pointer\Test\Util\Helper;
 
     public function testAlwaysIsAlwaysSatisfiedByAnyJsonPointer(): void
     {
-        $jsonPointer = JsonPointer::fromJsonString('/foo/bar');
+        $jsonPointer = Pointer\JsonPointer::fromJsonString('/foo/bar');
 
-        $specification = Specification::always();
+        $specification = Pointer\Specification::always();
 
         self::assertTrue($specification->isSatisfiedBy($jsonPointer));
     }
 
     public function testAnyOfIsNotSatisfiedByJsonPointerWhenEmpty(): void
     {
-        $jsonPointer = JsonPointer::fromJsonString('/foo/bar/baz');
+        $jsonPointer = Pointer\JsonPointer::fromJsonString('/foo/bar/baz');
 
-        $specification = Specification::anyOf();
+        $specification = Pointer\Specification::anyOf();
 
         self::assertFalse($specification->isSatisfiedBy($jsonPointer));
     }
 
     public function testAnyOfIsNotSatisfiedByJsonPointerWhenNoneOfTheSpecificationsAreSatisfiedByJsonPointer(): void
     {
-        $jsonPointer = JsonPointer::fromJsonString('/foo/bar/baz');
+        $jsonPointer = Pointer\JsonPointer::fromJsonString('/foo/bar/baz');
 
-        $specification = Specification::anyOf(
-            Specification::equals(JsonPointer::fromJsonString('/foo/bar')),
-            Specification::equals(JsonPointer::fromJsonString('/foo/baz')),
-            Specification::equals(JsonPointer::fromJsonString('/foo/qux')),
+        $specification = Pointer\Specification::anyOf(
+            Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/foo/bar')),
+            Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/foo/baz')),
+            Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/foo/qux')),
         );
 
         self::assertFalse($specification->isSatisfiedBy($jsonPointer));
@@ -61,12 +59,12 @@ final class SpecificationTest extends Framework\TestCase
 
     public function testAnyOfIsNotSatisfiedByJsonPointerWhenAnyOfTheSpecificationsIsSatisfiedByJsonPointer(): void
     {
-        $jsonPointer = JsonPointer::fromJsonString('/foo/baz');
+        $jsonPointer = Pointer\JsonPointer::fromJsonString('/foo/baz');
 
-        $specification = Specification::anyOf(
-            Specification::equals(JsonPointer::fromJsonString('/foo/bar')),
-            Specification::equals(JsonPointer::fromJsonString('/foo/baz')),
-            Specification::equals(JsonPointer::fromJsonString('/foo/qux')),
+        $specification = Pointer\Specification::anyOf(
+            Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/foo/bar')),
+            Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/foo/baz')),
+            Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/foo/qux')),
         );
 
         self::assertTrue($specification->isSatisfiedBy($jsonPointer));
@@ -74,9 +72,9 @@ final class SpecificationTest extends Framework\TestCase
 
     public function testClosureIsNotSatisfiedWhenClosureReturnsFalse(): void
     {
-        $jsonPointer = JsonPointer::fromJsonString('/foo/bar');
+        $jsonPointer = Pointer\JsonPointer::fromJsonString('/foo/bar');
 
-        $specification = Specification::closure(static function (): bool {
+        $specification = Pointer\Specification::closure(static function (): bool {
             return false;
         });
 
@@ -85,9 +83,9 @@ final class SpecificationTest extends Framework\TestCase
 
     public function testClosureIsSatisfiedWhenClosureReturnsTrue(): void
     {
-        $jsonPointer = JsonPointer::fromJsonString('/foo/bar');
+        $jsonPointer = Pointer\JsonPointer::fromJsonString('/foo/bar');
 
-        $specification = Specification::closure(static function (): bool {
+        $specification = Pointer\Specification::closure(static function (): bool {
             return true;
         });
 
@@ -96,49 +94,49 @@ final class SpecificationTest extends Framework\TestCase
 
     public function testEqualsIsNotSatisfiedByJsonPointerWhenJsonPointerDoesNotEqualOther(): void
     {
-        $jsonPointer = JsonPointer::fromJsonString('/foo/bar/baz');
+        $jsonPointer = Pointer\JsonPointer::fromJsonString('/foo/bar/baz');
 
-        $other = JsonPointer::fromJsonString('/foo/bar');
+        $other = Pointer\JsonPointer::fromJsonString('/foo/bar');
 
-        $specification = Specification::equals($other);
+        $specification = Pointer\Specification::equals($other);
 
         self::assertFalse($specification->isSatisfiedBy($jsonPointer));
     }
 
     public function testEqualsIsSatisfiedByJsonPointerWhenJsonPointerEqualsOther(): void
     {
-        $jsonPointer = JsonPointer::fromJsonString('/foo/bar');
+        $jsonPointer = Pointer\JsonPointer::fromJsonString('/foo/bar');
 
-        $other = JsonPointer::fromJsonString('/foo/bar');
+        $other = Pointer\JsonPointer::fromJsonString('/foo/bar');
 
-        $specification = Specification::equals($other);
+        $specification = Pointer\Specification::equals($other);
 
         self::assertTrue($specification->isSatisfiedBy($jsonPointer));
     }
 
     public function testNeverIsNotSatisfiedByAnyJsonPointer(): void
     {
-        $jsonPointer = JsonPointer::fromJsonString('/foo/bar');
+        $jsonPointer = Pointer\JsonPointer::fromJsonString('/foo/bar');
 
-        $specification = Specification::never();
+        $specification = Pointer\Specification::never();
 
         self::assertFalse($specification->isSatisfiedBy($jsonPointer));
     }
 
     public function testNotIsNotSatisfiedByJsonPointerWhenJsonPointerSatisfiesSpecification(): void
     {
-        $jsonPointer = JsonPointer::fromJsonString('/foo');
+        $jsonPointer = Pointer\JsonPointer::fromJsonString('/foo');
 
-        $specification = Specification::not(Specification::equals(JsonPointer::fromJsonString('/foo')));
+        $specification = Pointer\Specification::not(Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/foo')));
 
         self::assertFalse($specification->isSatisfiedBy($jsonPointer));
     }
 
     public function testNotIsSatisfiedByJsonPointerWhenJsonPointerDoesNotSatisfySpecification(): void
     {
-        $jsonPointer = JsonPointer::fromJsonString('/foo');
+        $jsonPointer = Pointer\JsonPointer::fromJsonString('/foo');
 
-        $specification = Specification::not(Specification::equals(JsonPointer::fromJsonString('/foo/bar')));
+        $specification = Pointer\Specification::not(Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/foo/bar')));
 
         self::assertTrue($specification->isSatisfiedBy($jsonPointer));
     }
